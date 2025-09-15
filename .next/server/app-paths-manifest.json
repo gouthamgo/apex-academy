@@ -1,3 +1,10 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/apex/page": "app/apex/page.js",
+  "/apex/[slug]/page": "app/apex/[slug]/page.js",
+  "/tutorials/page": "app/tutorials/page.js",
+  "/tutorials/[category]/[slug]/page": "app/tutorials/[category]/[slug]/page.js",
+  "/tutorials/[category]/page": "app/tutorials/[category]/page.js",
   "/learn/page": "app/learn/page.js"
 }

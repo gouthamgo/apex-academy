@@ -1,0 +1,679 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" href="/_next/static/media/e4af272ccee01ff0-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="stylesheet" href="/_next/static/css/22ad713ce67a0c5a.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-56d088442ba9ae75.js"/><script src="/_next/static/chunks/fd9d1056-0c242c2bc45ec983.js" async=""></script><script src="/_next/static/chunks/117-cccd694c388ef3b9.js" async=""></script><script src="/_next/static/chunks/main-app-acda637073404e5e.js" async=""></script><script src="/_next/static/chunks/972-b961e7fa2b3981c2.js" async=""></script><script src="/_next/static/chunks/787-3181826bf5263476.js" async=""></script><script src="/_next/static/chunks/app/layout-b3e8097f415af637.js" async=""></script><script src="/_next/static/chunks/app/tutorials/%5Bcategory%5D/%5Bslug%5D/page-7a7ff4fb184c05db.js" async=""></script><title>LWC Component Communication Patterns | Apex Academy</title><meta name="description" content="Master Lightning Web Component communication patterns including parent-child properties, custom events, and Lightning Message Service for complex scenarios."/><meta name="author" content="Apex Academy"/><meta name="keywords" content="lwc, component-communication, events, lms, properties"/><meta name="creator" content="Apex Academy"/><meta name="publisher" content="Apex Academy"/><meta name="robots" content="index, follow"/><meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"/><meta name="google-site-verification" content="your-google-verification-code"/><meta property="og:title" content="LWC Component Communication Patterns"/><meta property="og:description" content="Master Lightning Web Component communication patterns including parent-child properties, custom events, and Lightning Message Service for complex scenarios."/><meta property="og:type" content="article"/><meta property="article:modified_time" content="2025-01-15"/><meta property="article:author" content="Apex Academy"/><meta property="article:tag" content="lwc"/><meta property="article:tag" content="component-communication"/><meta property="article:tag" content="events"/><meta property="article:tag" content="lms"/><meta property="article:tag" content="properties"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="LWC Component Communication Patterns"/><meta name="twitter:description" content="Master Lightning Web Component communication patterns including parent-child properties, custom events, and Lightning Message Service for complex scenarios."/><meta name="next-size-adjust"/><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body class="__className_f367f3"><script>!function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');if('system'===e||(!e&&true)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme = 'dark';c.add('dark')}else{d.style.colorScheme = 'light';c.add('light')}}else if(e){c.add(e|| '')}if(e==='light'||e==='dark')d.style.colorScheme=e}catch(e){}}()</script><div class="min-h-screen flex flex-col"><header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60"><div class="container mx-auto px-4 sm:px-6 lg:px-8"><div class="flex h-16 items-center justify-between"><div class="flex items-center"><a class="flex items-center space-x-2 hover:opacity-80 transition-opacity" href="/"><div class="h-8 w-8 bg-gradient-to-br from-salesforce-blue to-salesforce-lightblue rounded-lg flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-5 w-5 text-white"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div><span class="text-xl font-bold text-gray-900 dark:text-white">Apex Academy</span></a></div><nav class="hidden md:flex items-center space-x-8"><a class="text-sm font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400 text-gray-700 dark:text-gray-300" href="/">Home</a><a class="text-sm font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400 text-gray-700 dark:text-gray-300" href="/learn">Learn Apex</a><div class="text-sm font-medium text-gray-400 dark:text-gray-600 cursor-not-allowed relative group">LWC Fundamentals<span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Coming Soon</span></div><div class="text-sm font-medium text-gray-400 dark:text-gray-600 cursor-not-allowed relative group">Integration Patterns<span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Coming Soon</span></div><div class="text-sm font-medium text-gray-400 dark:text-gray-600 cursor-not-allowed relative group">Testing Strategies<span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Coming Soon</span></div><div class="text-sm font-medium text-gray-400 dark:text-gray-600 cursor-not-allowed relative group">Tutorials<span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Coming Soon</span></div></nav><div class="flex items-center space-x-4"><button class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors" title="Search tutorials"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-5 w-5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></button><div class="w-9 h-9 rounded-md border border-gray-200 dark:border-gray-700 animate-pulse"></div><button class="md:hidden p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-5 w-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button></div></div></div></header><main class="flex-1"><div class="min-h-screen bg-gray-50 dark:bg-gray-900"><div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700"><div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4"><nav class="flex items-center space-x-2 text-sm"><a class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" href="/">Home</a><span class="text-gray-400 dark:text-gray-600">/</span><a class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" href="/tutorials">Tutorials</a><span class="text-gray-400 dark:text-gray-600">/</span><a class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 capitalize" href="/tutorials/lwc">lwc</a><span class="text-gray-400 dark:text-gray-600">/</span><span class="text-gray-900 dark:text-gray-100 font-medium">LWC Component Communication Patterns</span></nav></div></div><div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8"><div class="flex flex-col lg:flex-row gap-8"><article class="flex-1 max-w-none"><header class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-8"><div class="flex items-start justify-between mb-6"><div class="flex items-center space-x-3"><span class="px-3 py-1 text-sm font-medium rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400">LWC</span><span class="px-3 py-1 text-sm font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">intermediate</span><span class="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 rounded-full">Featured</span></div></div><h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">LWC Component Communication Patterns</h1><p class="text-xl text-gray-600 dark:text-gray-400 mb-6">Master Lightning Web Component communication patterns including parent-child properties, custom events, and Lightning Message Service for complex scenarios.</p><div class="flex flex-wrap items-center gap-6 text-sm text-gray-500 dark:text-gray-400 mb-6"><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4 mr-2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Apex Academy</div><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock h-4 w-4 mr-2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>11 min read</div><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big h-4 w-4 mr-2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><path d="m9 11 3 3L22 4"></path></svg>Updated <!-- -->January 15, 2025</div></div><div class="flex flex-wrap gap-2"><span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag h-3 w-3 mr-1"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>lwc</span><span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag h-3 w-3 mr-1"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>component-communication</span><span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag h-3 w-3 mr-1"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>events</span><span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag h-3 w-3 mr-1"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>lms</span><span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag h-3 w-3 mr-1"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>properties</span></div><div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg"><h3 class="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2">Prerequisites</h3><ul class="text-sm text-blue-800 dark:text-blue-200 space-y-1"><li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-3 w-3 mr-2 flex-shrink-0"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>lwc-basics</li><li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-3 w-3 mr-2 flex-shrink-0"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>javascript-fundamentals</li><li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-3 w-3 mr-2 flex-shrink-0"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>dom-events</li></ul></div></header><div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8"><div class="prose prose-lg dark:prose-dark max-w-none"><h1 id="lwc-component-communication-patterns" class="heading-1  group">
+    <a href="#lwc-component-communication-patterns" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      LWC Component Communication Patterns
+    </a>
+  </h1><p>Component communication is fundamental to building complex Lightning Web Component applications. This tutorial covers all the essential patterns you need to master, from simple parent-child communication to complex cross-component messaging.</p>
+<h2 id="overview-of-communication-patterns" class="heading-2  group">
+    <a href="#overview-of-communication-patterns" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Overview of Communication Patterns
+    </a>
+  </h2><p>Lightning Web Components support several communication patterns:</p>
+<ol>
+<li><strong>Parent to Child</strong>: Properties and method calls</li>
+<li><strong>Child to Parent</strong>: Custom events</li>
+<li><strong>Sibling Components</strong>: Lightning Message Service (LMS)</li>
+<li><strong>Cross-DOM Communication</strong>: Lightning Message Service</li>
+<li><strong>Component to Application</strong>: Application events</li>
+</ol>
+<blockquote class="border-l-4 border-gray-300 dark:border-gray-600 pl-4 py-2 my-4 italic text-gray-700 dark:text-gray-300"><p>💡 <strong>TIP</strong>: Choose the simplest pattern that meets your needs. Don&#39;t use LMS when a simple property or event will do.</p>
+</blockquote><h2 id="pattern-1-parent-to-child-communication" class="heading-2  group">
+    <a href="#pattern-1-parent-to-child-communication" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Pattern 1: Parent to Child Communication
+    </a>
+  </h2><h3 id="using-properties" class="heading-3  group">
+    <a href="#using-properties" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Using Properties
+    </a>
+  </h3><p>The most straightforward way to pass data from parent to child is through properties.</p>
+<p><strong>Child Component (productCard.js):</strong></p>
+<div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">import { LightningElement, api } from 'lwc';
+
+export default class ProductCard extends LightningElement {
+    // @api makes this property public
+    // ^^^^
+    // PUBLIC PROPERTY = Parent can SET this value
+    // → REQUIRED for parent-to-child data flow
+    @api product;
+
+    @api isSelected = false;
+    // ^^^^^^^^^^^^^^^^^^
+    // DEFAULT VALUE = What happens if parent doesn't set it
+    // 💡 BEST PRACTICE: Always provide sensible defaults
+
+    @api maxPrice;
+    // ^^^^^^^^^^
+    // REACTIVE PROPERTY = Component rerenders when this changes
+    // → Automatically triggers getter/setter if defined
+
+    // Computed property based on @api properties
+    get isDiscounted() {
+        // ^^^^^^^^^^^^^^^^
+        // COMPUTED PROPERTY = Calculated from other properties
+        // → Automatically recalculates when dependencies change
+        return this.product && this.product.originalPrice > this.product.currentPrice;
+    }
+
+    get displayPrice() {
+        if (!this.product) return 'N/A';
+
+        // 💡 BEST PRACTICE: Handle null/undefined gracefully
+        return this.product.currentPrice ?
+            `$${this.product.currentPrice.toFixed(2)}` :
+            'Price not available';
+    }
+
+    // Property setter for validation
+    @api
+    get selectedQuantity() {
+        return this._selectedQuantity || 1;
+    }
+
+    set selectedQuantity(value) {
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // SETTER VALIDATION = Ensure data integrity
+        // → Called whenever parent sets this property
+        const numValue = parseInt(value, 10);
+        this._selectedQuantity = numValue > 0 ? numValue : 1;
+
+        // 💀 EXAM TRAP: Setters don't automatically trigger rerenders
+        // You may need to call this.dispatchEvent() for reactive updates
+    }
+}</code></pre>
+  </div><p><strong>Child Component Template (productCard.html):</strong></p>
+<div class="code-block-wrapper" data-language="html">
+    <pre class="language-html"><code class="language-html"><template>
+    <div class="product-card" data-id={product.id}>
+        <!-- 💡 CONDITIONAL RENDERING: Only show if product exists -->
+        <template if:true={product}>
+            <div class="product-image">
+                <img src={product.imageUrl} alt={product.name} />
+            </div>
+
+            <div class="product-details">
+                <h3 class="product-name">{product.name}</h3>
+
+                <!-- 💡 COMPUTED PROPERTIES: Use getters for dynamic values -->
+                <p class="product-price">{displayPrice}</p>
+
+                <!-- 💡 CONDITIONAL CLASSES: Dynamic styling based on state -->
+                <div class={productCardClass}>
+                    <template if:true={isDiscounted}>
+                        <span class="discount-badge">Sale!</span>
+                    </template>
+
+                    <template if:true={isSelected}>
+                        <span class="selected-indicator">✓ Selected</span>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <!-- 💡 ERROR STATE: Always handle missing data -->
+        <template if:false={product}>
+            <div class="error-state">
+                <p>Product information not available</p>
+            </div>
+        </template>
+    </div>
+</template></code></pre>
+  </div><p><strong>Parent Component (productList.js):</strong></p>
+<div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">import { LightningElement, track } from 'lwc';
+
+export default class ProductList extends LightningElement {
+    @track products = [
+        // 💡 SAMPLE DATA: Real applications would fetch from server
+        {
+            id: '1',
+            name: 'Laptop',
+            currentPrice: 999.99,
+            originalPrice: 1299.99,
+            imageUrl: '/images/laptop.jpg'
+        },
+        {
+            id: '2',
+            name: 'Phone',
+            currentPrice: 799.99,
+            originalPrice: 799.99,
+            imageUrl: '/images/phone.jpg'
+        }
+    ];
+
+    @track selectedProductId = '1';
+    // ^^^^^^^^^^^^^^^^^^^^^^
+    // TRACKED PROPERTY = Component rerenders when this changes
+    // → Use @track for objects/arrays that change internally
+
+    maxBudget = 1000;
+    // ^^^^^^^^^^^^^^^^
+    // SIMPLE PROPERTY = Passed to child as-is
+    // → No @track needed for primitive values that don't change
+
+    // Method that could be called by parent
+    @api
+    refreshProducts() {
+        // ^^^^^^^^^^^^^^^^^
+        // PUBLIC METHOD = Parent can call this method
+        // → Use @api to expose methods to parent components
+        // ⚠️  EXAM TRAP: Only @api methods are accessible to parents
+
+        // Refresh logic here
+        this.loadProducts();
+    }
+
+    loadProducts() {
+        // ^^^^^^^^^^^^^^^
+        // PRIVATE METHOD = Only this component can call
+        // → Don't use @api for internal methods
+
+        // Implementation would fetch fresh data
+        console.log('Loading products...');
+    }
+}</code></pre>
+  </div><p><strong>Parent Component Template (productList.html):</strong></p>
+<div class="code-block-wrapper" data-language="html">
+    <pre class="language-html"><code class="language-html"><template>
+    <div class="product-list">
+        <h2>Available Products</h2>
+
+        <!-- 💡 ITERATION: Loop through products array -->
+        <template for:each={products} for:item="product">
+            <!--
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 FOR:EACH LOOP = Iterate over array
+                 → MUST include key attribute for performance
+                 💀 EXAM TRAP: Missing key causes render issues
+            -->
+            <c-product-card
+                key={product.id}
+                product={product}
+                is-selected={isProductSelected}
+                max-price={maxBudget}
+                selected-quantity="1">
+                <!--
+                     ^^^^^^^^^^^^^^^^^^
+                     PROPERTY BINDING = Pass data to child
+                     → kebab-case in template = camelCase in JavaScript
+                     💡 WHY? HTML attributes are case-insensitive
+                -->
+            </c-product-card>
+        </template>
+    </div>
+</template></code></pre>
+  </div><h3 id="using-method-calls" class="heading-3  group">
+    <a href="#using-method-calls" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Using Method Calls
+    </a>
+  </h3><p>Parents can also call child methods directly:</p>
+<div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">// Parent component
+export default class ProductManager extends LightningElement {
+
+    handleRefreshClick() {
+        // Get reference to child component
+        const productCard = this.template.querySelector('c-product-card');
+
+        if (productCard) {
+            // Call child's public method
+            productCard.refreshData();
+            // ^^^^^^^^^^^^^^^^^^^^
+            // METHOD CALL = Direct invocation of child method
+            // → Only works with @api methods
+            // ⚠️  EXAM TRAP: Non-@api methods are not accessible
+        }
+    }
+}</code></pre>
+  </div><h2 id="pattern-2-child-to-parent-communication" class="heading-2  group">
+    <a href="#pattern-2-child-to-parent-communication" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Pattern 2: Child to Parent Communication
+    </a>
+  </h2><h3 id="using-custom-events" class="heading-3  group">
+    <a href="#using-custom-events" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Using Custom Events
+    </a>
+  </h3><p>Custom events are the standard way for children to communicate with parents:</p>
+<p><strong>Child Component (productCard.js):</strong></p>
+<div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">import { LightningElement, api } from 'lwc';
+
+export default class ProductCard extends LightningElement {
+    @api product;
+
+    handleAddToCart() {
+        // Create custom event with data
+        const addToCartEvent = new CustomEvent('addtocart', {
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // CUSTOM EVENT = Child-to-parent communication
+            // → Event name should be descriptive and lowercase
+
+            detail: {
+                // ^^^^^^^^
+                // EVENT DETAIL = Data payload for parent
+                // → All event data goes in the detail object
+                productId: this.product.id,
+                productName: this.product.name,
+                quantity: this.selectedQuantity,
+                timestamp: new Date().toISOString()
+            },
+
+            bubbles: true,
+            // ^^^^^^^^^^^^^
+            // BUBBLES = Event travels up the DOM tree
+            // → Usually set to true for parent communication
+            // 💡 WHY? Allows parent containers to catch the event
+
+            composed: false
+            // ^^^^^^^^^^^^^^
+            // COMPOSED = Event crosses shadow DOM boundaries
+            // → Usually false for component-to-component communication
+            // ⚠️  EXAM TRAP: Setting composed=true can cause unwanted behavior
+        });
+
+        // Dispatch the event
+        this.dispatchEvent(addToCartEvent);
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // DISPATCH EVENT = Send event to parent
+        // → Parent must have matching event listener
+    }
+
+    handleQuantityChange(event) {
+        const newQuantity = event.target.value;
+        this.selectedQuantity = newQuantity;
+
+        // Notify parent of quantity change
+        this.dispatchEvent(new CustomEvent('quantitychange', {
+            detail: {
+                productId: this.product.id,
+                newQuantity: parseInt(newQuantity, 10),
+                oldQuantity: this.previousQuantity
+            }
+        }));
+
+        this.previousQuantity = newQuantity;
+    }
+
+    handleProductSelect() {
+        // Simple event without data
+        this.dispatchEvent(new CustomEvent('productselect', {
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // SIMPLE EVENT = No detail needed
+            // → Sometimes you just need to notify parent of action
+
+            detail: { productId: this.product.id }
+        }));
+    }
+}</code></pre>
+  </div><p><strong>Child Component Template (productCard.html):</strong></p>
+<div class="code-block-wrapper" data-language="html">
+    <pre class="language-html"><code class="language-html"><template>
+    <div class="product-card">
+        <div class="product-info">
+            <h3>{product.name}</h3>
+            <p>{product.price}</p>
+        </div>
+
+        <div class="product-actions">
+            <!-- 💡 EVENT HANDLERS: Wire UI events to component methods -->
+            <input
+                type="number"
+                value={selectedQuantity}
+                onchange={handleQuantityChange}
+                min="1" />
+                <!--
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     EVENT BINDING = Connect DOM events to component methods
+                     → onchange, onclick, etc. map to handle* methods
+                -->
+
+            <button
+                onclick={handleAddToCart}
+                class="add-to-cart-btn">
+                Add to Cart
+            </button>
+
+            <button
+                onclick={handleProductSelect}
+                class={selectButtonClass}>
+                {selectButtonLabel}
+            </button>
+        </div>
+    </div>
+</template></code></pre>
+  </div><p><strong>Parent Component (productList.js):</strong></p>
+<div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">import { LightningElement, track } from 'lwc';
+
+export default class ProductList extends LightningElement {
+    @track cartItems = [];
+    @track selectedProducts = new Set();
+
+    handleAddToCart(event) {
+        // ^^^^^^^^^^^^^^^^^^^^^
+        // EVENT HANDLER = Responds to child component events
+        // → Method name should match the event type
+
+        const productDetails = event.detail;
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // EVENT DETAIL = Extract data from child event
+        // → All event data is in the detail property
+
+        console.log('Adding to cart:', productDetails);
+
+        // Add to cart logic
+        const cartItem = {
+            id: productDetails.productId,
+            name: productDetails.productName,
+            quantity: productDetails.quantity,
+            addedAt: productDetails.timestamp
+        };
+
+        this.cartItems = [...this.cartItems, cartItem];
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // IMMUTABLE UPDATE = Create new array for reactivity
+        // → @track requires new object reference to detect changes
+        // 💀 EXAM TRAP: Mutating arrays directly won't trigger rerenders
+
+        // Dispatch event to grandparent if needed
+        this.dispatchEvent(new CustomEvent('cartupdate', {
+            detail: {
+                cartItems: this.cartItems,
+                action: 'add'
+            }
+        }));
+    }
+
+    handleQuantityChange(event) {
+        const { productId, newQuantity } = event.detail;
+
+        // Update existing cart item
+        this.cartItems = this.cartItems.map(item =>
+            item.id === productId
+                ? { ...item, quantity: newQuantity }
+                : item
+        );
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // FUNCTIONAL UPDATE = Pure function approach
+        // → Creates new array with updated item
+        // 💡 BEST PRACTICE: Prefer immutable updates for clarity
+    }
+
+    handleProductSelect(event) {
+        const productId = event.detail.productId;
+
+        // Toggle selection
+        if (this.selectedProducts.has(productId)) {
+            this.selectedProducts.delete(productId);
+        } else {
+            this.selectedProducts.add(productId);
+        }
+
+        // Force reactivity for Set changes
+        this.selectedProducts = new Set(this.selectedProducts);
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // SET REACTIVITY = Create new Set to trigger rerenders
+        // → @track doesn't detect changes inside Set/Map objects
+        // 💀 EXAM TRAP: Mutating Set/Map without reassignment won't rerender
+    }
+}</code></pre>
+  </div><p><strong>Parent Component Template (productList.html):</strong></p>
+<div class="code-block-wrapper" data-language="html">
+    <pre class="language-html"><code class="language-html"><template>
+    <div class="product-list">
+        <div class="cart-summary">
+            <h3>Cart ({cartItems.length} items)</h3>
+        </div>
+
+        <div class="products">
+            <template for:each={products} for:item="product">
+                <c-product-card
+                    key={product.id}
+                    product={product}
+                    onaddtocart={handleAddToCart}
+                    onquantitychange={handleQuantityChange}
+                    onproductselect={handleProductSelect}>
+                    <!--
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                         EVENT LISTENERS = Handle child component events
+                         → on + eventname = handler method
+                         💡 Event names are case-sensitive in JavaScript
+                    -->
+                </c-product-card>
+            </template>
+        </div>
+    </div>
+</template></code></pre>
+  </div><h2 id="pattern-3-lightning-message-service-lms" class="heading-2  group">
+    <a href="#pattern-3-lightning-message-service-lms" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Pattern 3: Lightning Message Service (LMS)
+    </a>
+  </h2><p>For sibling or cross-DOM communication, use Lightning Message Service:</p>
+<p><strong>Message Channel (productEvents.messageChannel-meta.xml):</strong></p>
+<div class="code-block-wrapper" data-language="xml">
+    <pre class="language-xml"><code class="language-xml"><?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Product Events</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Channel for product-related events across components</description>
+    <lightningMessageFields>
+        <fieldName>action</fieldName>
+        <description>The action being performed</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>productId</fieldName>
+        <description>ID of the product</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>productData</fieldName>
+        <description>Additional product data</description>
+    </lightningMessageFields>
+</LightningMessageChannel></code></pre>
+  </div><p><strong>Publisher Component (productActions.js):</strong></p>
+<div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">import { LightningElement, wire } from 'lwc';
+import { publish, MessageContext } from 'lightning/messageService';
+import PRODUCT_EVENTS_CHANNEL from '@salesforce/messageChannel/ProductEvents__c';
+
+export default class ProductActions extends LightningElement {
+
+    @wire(MessageContext)
+    messageContext;
+    // ^^^^^^^^^^^^^^^
+    // MESSAGE CONTEXT = Required for LMS operations
+    // → Wire this to get the messaging context
+    // 💀 EXAM TRAP: Forgetting @wire(MessageContext) breaks LMS
+
+    handleProductUpdate(event) {
+        const productId = event.target.dataset.productId;
+
+        // Publish message to all subscribers
+        const message = {
+            // ^^^^^^^^^^^^^^^
+            // MESSAGE PAYLOAD = Data sent to all subscribers
+            // → Structure must match messageChannel definition
+            action: 'update',
+            productId: productId,
+            productData: {
+                timestamp: new Date().toISOString(),
+                updatedBy: 'ProductActions'
+            }
+        };
+
+        publish(this.messageContext, PRODUCT_EVENTS_CHANNEL, message);
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // PUBLISH = Send message to all subscribers
+        // → Requires: messageContext, channel, message payload
+        // 💡 BEST PRACTICE: Always check messageContext exists
+
+        if (this.messageContext) {
+            publish(this.messageContext, PRODUCT_EVENTS_CHANNEL, message);
+        } else {
+            console.error('Message context not available');
+        }
+    }
+
+    handleProductDelete(event) {
+        const productId = event.target.dataset.productId;
+
+        publish(this.messageContext, PRODUCT_EVENTS_CHANNEL, {
+            action: 'delete',
+            productId: productId,
+            productData: { deletedAt: new Date() }
+        });
+    }
+}</code></pre>
+  </div><p><strong>Subscriber Component (productNotifications.js):</strong></p>
+<div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">import { LightningElement, wire } from 'lwc';
+import { subscribe, unsubscribe, MessageContext } from 'lightning/messageService';
+import PRODUCT_EVENTS_CHANNEL from '@salesforce/messageChannel/ProductEvents__c';
+
+export default class ProductNotifications extends LightningElement {
+    subscription = null;
+    notifications = [];
+
+    @wire(MessageContext)
+    messageContext;
+
+    connectedCallback() {
+        // ^^^^^^^^^^^^^^^^^
+        // LIFECYCLE HOOK = Component is inserted into DOM
+        // → Perfect place to set up subscriptions
+        this.subscribeToMessageChannel();
+    }
+
+    disconnectedCallback() {
+        // ^^^^^^^^^^^^^^^^^^^^
+        // LIFECYCLE HOOK = Component is removed from DOM
+        // → CRITICAL: Unsubscribe to prevent memory leaks
+        this.unsubscribeFromMessageChannel();
+    }
+
+    subscribeToMessageChannel() {
+        if (!this.subscription) {
+            this.subscription = subscribe(
+                this.messageContext,
+                PRODUCT_EVENTS_CHANNEL,
+                this.handleProductEvent.bind(this)
+            );
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // SUBSCRIBE = Listen for messages on channel
+            // → Returns subscription object for later unsubscribe
+            // 💀 EXAM TRAP: Forgetting .bind(this) loses component context
+        }
+    }
+
+    unsubscribeFromMessageChannel() {
+        if (this.subscription) {
+            unsubscribe(this.subscription);
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // UNSUBSCRIBE = Stop listening and free memory
+            // → CRITICAL for preventing memory leaks
+            this.subscription = null;
+        }
+    }
+
+    handleProductEvent(message) {
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // MESSAGE HANDLER = Process received messages
+        // → Receives the full message payload
+
+        console.log('Received product event:', message);
+
+        const notification = {
+            id: Date.now(),
+            message: `Product ${message.action}: ${message.productId}`,
+            timestamp: new Date().toLocaleTimeString(),
+            type: message.action
+        };
+
+        // Add notification to list
+        this.notifications = [notification, ...this.notifications];
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // IMMUTABLE UPDATE = Add to front of array
+        // → Creates new array for reactivity
+
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            this.removeNotification(notification.id);
+        }, 5000);
+    }
+
+    removeNotification(notificationId) {
+        this.notifications = this.notifications.filter(
+            notif => notif.id !== notificationId
+        );
+    }
+}</code></pre>
+  </div><h2 id="anti-patterns-to-avoid" class="heading-2  group">
+    <a href="#anti-patterns-to-avoid" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Anti-Patterns to Avoid
+    </a>
+  </h2><blockquote class="border-l-4 border-gray-300 dark:border-gray-600 pl-4 py-2 my-4 italic text-gray-700 dark:text-gray-300"><p>⚠️ <strong>WARNING</strong>: These patterns are commonly misused and cause bugs!</p>
+</blockquote><h3 id="don39t-use-dom-manipulation-for-communication" class="heading-3  group">
+    <a href="#don39t-use-dom-manipulation-for-communication" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      ❌ Don&#39;t: Use DOM Manipulation for Communication
+    </a>
+  </h3><div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">// BAD - Direct DOM manipulation
+handleClick() {
+    const siblingComponent = document.querySelector('c-sibling');
+    siblingComponent.someProperty = 'new value'; // Fragile and unreliable
+}
+
+// GOOD - Use LMS or events
+handleClick() {
+    publish(this.messageContext, CHANNEL, { newValue: 'new value' });
+}</code></pre>
+  </div><h3 id="don39t-mutate-props-in-child-components" class="heading-3  group">
+    <a href="#don39t-mutate-props-in-child-components" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      ❌ Don&#39;t: Mutate Props in Child Components
+    </a>
+  </h3><div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">// BAD - Mutating parent data
+@api product;
+
+handleUpdate() {
+    this.product.name = 'Updated Name'; // Violates data flow principles
+}
+
+// GOOD - Dispatch event to parent
+handleUpdate() {
+    this.dispatchEvent(new CustomEvent('updateproduct', {
+        detail: { id: this.product.id, newName: 'Updated Name' }
+    }));
+}</code></pre>
+  </div><h3 id="don39t-create-memory-leaks-with-lms" class="heading-3  group">
+    <a href="#don39t-create-memory-leaks-with-lms" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      ❌ Don&#39;t: Create Memory Leaks with LMS
+    </a>
+  </h3><div class="code-block-wrapper" data-language="javascript">
+    <pre class="language-javascript"><code class="language-javascript">// BAD - No cleanup
+connectedCallback() {
+    subscribe(this.messageContext, CHANNEL, this.handler);
+    // Missing unsubscribe = memory leak
+}
+
+// GOOD - Proper cleanup
+connectedCallback() {
+    this.subscription = subscribe(this.messageContext, CHANNEL, this.handler);
+}
+
+disconnectedCallback() {
+    if (this.subscription) {
+        unsubscribe(this.subscription);
+    }
+}</code></pre>
+  </div><h2 id="summary" class="heading-2  group">
+    <a href="#summary" class="anchor-link opacity-0 group-hover:opacity-100 transition-opacity">
+      Summary
+    </a>
+  </h2><p>Choose the right communication pattern based on your needs:</p>
+<ul>
+<li><strong>Parent → Child</strong>: Use <code>@api</code> properties and method calls</li>
+<li><strong>Child → Parent</strong>: Use custom events with <code>dispatchEvent</code></li>
+<li><strong>Sibling/Cross-DOM</strong>: Use Lightning Message Service</li>
+<li><strong>Complex Scenarios</strong>: Combine patterns as needed</li>
+</ul>
+<p>Remember to always clean up subscriptions and handle edge cases gracefully!</p>
+</div></div></article><aside class="lg:w-80 space-y-6"><div class="sticky top-24"><div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm"><button class="flex items-center justify-between w-full text-left p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors border-b border-gray-200 dark:border-gray-700"><h3 class="text-lg font-semibold text-gray-900 dark:text-white">📑 Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-5 w-5 text-gray-500"><path d="m6 9 6 6 6-6"></path></svg></button><nav class="p-2 max-h-96 overflow-y-auto"><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-0 text-gray-700 dark:text-gray-300 text-base font-semibold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">LWC Component Communication Patterns</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-4 text-gray-700 dark:text-gray-300 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Overview of Communication Patterns</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-4 text-gray-700 dark:text-gray-300 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Pattern 1: Parent to Child Communication</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-8 text-gray-700 dark:text-gray-300 text-xs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Using Properties</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-8 text-gray-700 dark:text-gray-300 text-xs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Using Method Calls</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-4 text-gray-700 dark:text-gray-300 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Pattern 2: Child to Parent Communication</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-8 text-gray-700 dark:text-gray-300 text-xs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Using Custom Events</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-4 text-gray-700 dark:text-gray-300 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Pattern 3: Lightning Message Service (LMS)</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-4 text-gray-700 dark:text-gray-300 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Anti-Patterns to Avoid</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-8 text-gray-700 dark:text-gray-300 text-xs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">❌ Don&#x27;t: Use DOM Manipulation for Communication</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-8 text-gray-700 dark:text-gray-300 text-xs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">❌ Don&#x27;t: Mutate Props in Child Components</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-8 text-gray-700 dark:text-gray-300 text-xs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">❌ Don&#x27;t: Create Memory Leaks with LMS</span></button><button class="toc-item flex items-center w-full text-left px-3 py-2 rounded-md transition-all duration-200 group hover:bg-gray-100 dark:hover:bg-gray-700 ml-4 text-gray-700 dark:text-gray-300 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4 mr-2 flex-shrink-0 text-gray-400 dark:text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Summary</span></button></nav></div></div><div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6"><h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Tutorial Progress</h3><div class="space-y-3"><div class="flex justify-between text-sm"><span class="text-gray-600 dark:text-gray-400">Reading Progress</span><span class="text-gray-900 dark:text-white font-medium">0%</span></div><div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2"><div class="progress-bar bg-blue-600 h-2 rounded-full w-0"></div></div><button class="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition-colors">Mark as Complete</button><button class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Bookmark Tutorial</button></div></div></aside></div></div></div></main><footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"><div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8"><div class="lg:col-span-2"><div class="flex items-center space-x-2 mb-4"><div class="h-8 w-8 bg-gradient-to-br from-salesforce-blue to-salesforce-lightblue rounded-lg flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-5 w-5 text-white"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div><span class="text-xl font-bold text-gray-900 dark:text-white">Apex Academy</span></div><p class="text-gray-600 dark:text-gray-400 mb-6 max-w-md">Master Salesforce development with comprehensive tutorials, detailed code examples, and expert insights. From Apex fundamentals to advanced Lightning Web Components.</p><div class="flex space-x-4"><a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github h-5 w-5"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a><a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter h-5 w-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="#" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin h-5 w-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a></div></div><div><h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Tutorials</h3><ul class="space-y-3"><li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" href="/tutorials/apex">Apex Fundamentals</a></li><li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" href="/tutorials/lwc">Lightning Web Components</a></li><li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" href="/tutorials/integration">Integration Patterns</a></li><li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" href="/tutorials/testing">Testing Strategies</a></li></ul></div><div><h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Resources</h3><ul class="space-y-3"><li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" href="/getting-started">Getting Started</a></li><li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" href="/best-practices">Best Practices</a></li><li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" href="/patterns">Common Patterns</a></li><li><a class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" href="/certification">Certification Guide</a></li></ul></div><div><h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Community</h3><ul class="space-y-3"><li><a href="https://trailhead.salesforce.com/community" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Trailblazer Community</a></li><li><a href="https://developer.salesforce.com" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Salesforce Developers</a></li><li><a href="https://stackoverflow.com/questions/tagged/salesforce" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Stack Overflow</a></li><li><a href="https://reddit.com/r/salesforce" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Reddit</a></li></ul></div></div><div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center"><p class="text-gray-500 dark:text-gray-400 text-sm">© <!-- -->2025<!-- --> Apex Academy. All rights reserved.</p><div class="flex space-x-6 mt-4 sm:mt-0"><a class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm transition-colors" href="/privacy">Privacy Policy</a><a class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm transition-colors" href="/terms">Terms of Service</a><a class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm transition-colors" href="/cookies">Cookie Policy</a></div></div></div></footer></div><script src="/_next/static/chunks/webpack-56d088442ba9ae75.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/media/e4af272ccee01ff0-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n2:HL[\"/_next/static/css/22ad713ce67a0c5a.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"3:I[12846,[],\"\"]\n6:I[4707,[],\"\"]\n9:I[36423,[],\"\"]\na:I[11554,[\"972\",\"static/chunks/972-b961e7fa2b3981c2.js\",\"787\",\"static/chunks/787-3181826bf5263476.js\",\"185\",\"static/chunks/app/layout-b3e8097f415af637.js\"],\"ThemeProvider\"]\nb:I[91966,[\"972\",\"static/chunks/972-b961e7fa2b3981c2.js\",\"787\",\"static/chunks/787-3181826bf5263476.js\",\"185\",\"static/chunks/app/layout-b3e8097f415af637.js\"],\"Header\"]\nc:I[72972,[\"972\",\"static/chunks/972-b961e7fa2b3981c2.js\",\"787\",\"static/chunks/787-3181826bf5263476.js\",\"381\",\"static/chunks/app/tutorials/%5Bcategory%5D/%5Bslug%5D/page-7a7ff4fb184c05db.js\"],\"\"]\ne:I[61060,[],\"\"]\n7:[\"category\",\"lwc\",\"d\"]\n8:[\"slug\",\"component-communication-patterns\",\"d\"]\nf:[]\n"])</script><script>self.__next_f.push([1,"0:[\"$\",\"$L3\",null,{\"buildId\":\"ZzMHMCDRSJ6Z-Qv7jhxuI\",\"assetPrefix\":\"\",\"urlParts\":[\"\",\"tutorials\",\"lwc\",\"component-communication-patterns\"],\"initialTree\":[\"\",{\"children\":[\"tutorials\",{\"children\":[[\"category\",\"lwc\",\"d\"],{\"children\":[[\"slug\",\"component-communication-patterns\",\"d\"],{\"children\":[\"__PAGE__?{\\\"category\\\":\\\"lwc\\\",\\\"slug\\\":\\\"component-communication-patterns\\\"}\",{}]}]}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"tutorials\",{\"children\":[[\"category\",\"lwc\",\"d\"],{\"children\":[[\"slug\",\"component-communication-patterns\",\"d\"],{\"children\":[\"__PAGE__\",{},[[\"$L4\",\"$L5\",null],null],null]},[null,[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"tutorials\",\"children\",\"$7\",\"children\",\"$8\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L9\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[null,[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"tutorials\",\"children\",\"$7\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L9\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[null,[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"tutorials\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L9\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/22ad713ce67a0c5a.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"suppressHydrationWarning\":true,\"children\":[\"$\",\"body\",null,{\"className\":\"__className_f367f3\",\"children\":[\"$\",\"$La\",null,{\"children\":[\"$\",\"div\",null,{\"className\":\"min-h-screen flex flex-col\",\"children\":[[\"$\",\"$Lb\",null,{}],[\"$\",\"main\",null,{\"className\":\"flex-1\",\"children\":[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L9\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":\"404\"}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],\"notFoundStyles\":[]}]}],[\"$\",\"footer\",null,{\"className\":\"bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700\",\"children\":[\"$\",\"div\",null,{\"className\":\"container mx-auto px-4 sm:px-6 lg:px-8 py-12\",\"children\":[[\"$\",\"div\",null,{\"className\":\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8\",\"children\":[[\"$\",\"div\",null,{\"className\":\"lg:col-span-2\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex items-center space-x-2 mb-4\",\"children\":[[\"$\",\"div\",null,{\"className\":\"h-8 w-8 bg-gradient-to-br from-salesforce-blue to-salesforce-lightblue rounded-lg flex items-center justify-center\",\"children\":[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-book-open h-5 w-5 text-white\",\"children\":[[\"$\",\"path\",\"vv98re\",{\"d\":\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"}],[\"$\",\"path\",\"1cyq3y\",{\"d\":\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"}],\"$undefined\"]}]}],[\"$\",\"span\",null,{\"className\":\"text-xl font-bold text-gray-900 dark:text-white\",\"children\":\"Apex Academy\"}]]}],[\"$\",\"p\",null,{\"className\":\"text-gray-600 dark:text-gray-400 mb-6 max-w-md\",\"children\":\"Master Salesforce development with comprehensive tutorials, detailed code examples, and expert insights. From Apex fundamentals to advanced Lightning Web Components.\"}],[\"$\",\"div\",null,{\"className\":\"flex space-x-4\",\"children\":[[\"$\",\"a\",null,{\"href\":\"#\",\"className\":\"text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors\",\"children\":[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-github h-5 w-5\",\"children\":[[\"$\",\"path\",\"tonef\",{\"d\":\"M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4\"}],[\"$\",\"path\",\"9comsn\",{\"d\":\"M9 18c-4.51 2-5-2-7-2\"}],\"$undefined\"]}]}],[\"$\",\"a\",null,{\"href\":\"#\",\"className\":\"text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors\",\"children\":[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-twitter h-5 w-5\",\"children\":[[\"$\",\"path\",\"pff0z6\",{\"d\":\"M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z\"}],\"$undefined\"]}]}],[\"$\",\"a\",null,{\"href\":\"#\",\"className\":\"text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors\",\"children\":[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-linkedin h-5 w-5\",\"children\":[[\"$\",\"path\",\"c2jq9f\",{\"d\":\"M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z\"}],[\"$\",\"rect\",\"mk3on5\",{\"width\":\"4\",\"height\":\"12\",\"x\":\"2\",\"y\":\"9\"}],[\"$\",\"circle\",\"bt5ra8\",{\"cx\":\"4\",\"cy\":\"4\",\"r\":\"2\"}],\"$undefined\"]}]}]]}]]}],[\"$\",\"div\",null,{\"children\":[[\"$\",\"h3\",null,{\"className\":\"text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4\",\"children\":\"Tutorials\"}],[\"$\",\"ul\",null,{\"className\":\"space-y-3\",\"children\":[[\"$\",\"li\",\"Apex Fundamentals\",{\"children\":[\"$\",\"$Lc\",null,{\"href\":\"/tutorials/apex\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Apex Fundamentals\"}]}],[\"$\",\"li\",\"Lightning Web Components\",{\"children\":[\"$\",\"$Lc\",null,{\"href\":\"/tutorials/lwc\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Lightning Web Components\"}]}],[\"$\",\"li\",\"Integration Patterns\",{\"children\":[\"$\",\"$Lc\",null,{\"href\":\"/tutorials/integration\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Integration Patterns\"}]}],[\"$\",\"li\",\"Testing Strategies\",{\"children\":[\"$\",\"$Lc\",null,{\"href\":\"/tutorials/testing\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Testing Strategies\"}]}]]}]]}],[\"$\",\"div\",null,{\"children\":[[\"$\",\"h3\",null,{\"className\":\"text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4\",\"children\":\"Resources\"}],[\"$\",\"ul\",null,{\"className\":\"space-y-3\",\"children\":[[\"$\",\"li\",\"Getting Started\",{\"children\":[\"$\",\"$Lc\",null,{\"href\":\"/getting-started\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Getting Started\"}]}],[\"$\",\"li\",\"Best Practices\",{\"children\":[\"$\",\"$Lc\",null,{\"href\":\"/best-practices\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Best Practices\"}]}],[\"$\",\"li\",\"Common Patterns\",{\"children\":[\"$\",\"$Lc\",null,{\"href\":\"/patterns\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Common Patterns\"}]}],[\"$\",\"li\",\"Certification Guide\",{\"children\":[\"$\",\"$Lc\",null,{\"href\":\"/certification\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Certification Guide\"}]}]]}]]}],[\"$\",\"div\",null,{\"children\":[[\"$\",\"h3\",null,{\"className\":\"text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4\",\"children\":\"Community\"}],[\"$\",\"ul\",null,{\"className\":\"space-y-3\",\"children\":[[\"$\",\"li\",\"Trailblazer Community\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://trailhead.salesforce.com/community\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Trailblazer Community\"}]}],[\"$\",\"li\",\"Salesforce Developers\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://developer.salesforce.com\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Salesforce Developers\"}]}],[\"$\",\"li\",\"Stack Overflow\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://stackoverflow.com/questions/tagged/salesforce\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Stack Overflow\"}]}],[\"$\",\"li\",\"Reddit\",{\"children\":[\"$\",\"a\",null,{\"href\":\"https://reddit.com/r/salesforce\",\"target\":\"_blank\",\"rel\":\"noopener noreferrer\",\"className\":\"text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors\",\"children\":\"Reddit\"}]}]]}]]}]]}],[\"$\",\"div\",null,{\"className\":\"border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center\",\"children\":[[\"$\",\"p\",null,{\"className\":\"text-gray-500 dark:text-gray-400 text-sm\",\"children\":[\"© \",2025,\" Apex Academy. All rights reserved.\"]}],[\"$\",\"div\",null,{\"className\":\"flex space-x-6 mt-4 sm:mt-0\",\"children\":[[\"$\",\"$Lc\",\"Privacy Policy\",{\"href\":\"/privacy\",\"className\":\"text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm transition-colors\",\"children\":\"Privacy Policy\"}],[\"$\",\"$Lc\",\"Terms of Service\",{\"href\":\"/terms\",\"className\":\"text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm transition-colors\",\"children\":\"Terms of Service\"}],[\"$\",\"$Lc\",\"Cookie Policy\",{\"href\":\"/cookies\",\"className\":\"text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm transition-colors\",\"children\":\"Cookie Policy\"}]]}]]}]]}]}]]}]}]}]}]],null],null],\"couldBeIntercepted\":false,\"initialHead\":[null,\"$Ld\"],\"globalErrorComponent\":\"$e\",\"missingSlots\":\"$Wf\"}]\n"])</script><script>self.__next_f.push([1,"11:I[62539,[\"972\",\"static/chunks/972-b961e7fa2b3981c2.js\",\"787\",\"static/chunks/787-3181826bf5263476.js\",\"381\",\"static/chunks/app/tutorials/%5Bcategory%5D/%5Bslug%5D/page-7a7ff4fb184c05db.js\"],\"TableOfContents\"]\n10:T6cab,"])</script><script>self.__next_f.push([1,"\u003ch1 id=\"lwc-component-communication-patterns\" class=\"heading-1  group\"\u003e\n    \u003ca href=\"#lwc-component-communication-patterns\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      LWC Component Communication Patterns\n    \u003c/a\u003e\n  \u003c/h1\u003e\u003cp\u003eComponent communication is fundamental to building complex Lightning Web Component applications. This tutorial covers all the essential patterns you need to master, from simple parent-child communication to complex cross-component messaging.\u003c/p\u003e\n\u003ch2 id=\"overview-of-communication-patterns\" class=\"heading-2  group\"\u003e\n    \u003ca href=\"#overview-of-communication-patterns\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Overview of Communication Patterns\n    \u003c/a\u003e\n  \u003c/h2\u003e\u003cp\u003eLightning Web Components support several communication patterns:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\u003cstrong\u003eParent to Child\u003c/strong\u003e: Properties and method calls\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eChild to Parent\u003c/strong\u003e: Custom events\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eSibling Components\u003c/strong\u003e: Lightning Message Service (LMS)\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eCross-DOM Communication\u003c/strong\u003e: Lightning Message Service\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eComponent to Application\u003c/strong\u003e: Application events\u003c/li\u003e\n\u003c/ol\u003e\n\u003cblockquote class=\"border-l-4 border-gray-300 dark:border-gray-600 pl-4 py-2 my-4 italic text-gray-700 dark:text-gray-300\"\u003e\u003cp\u003e💡 \u003cstrong\u003eTIP\u003c/strong\u003e: Choose the simplest pattern that meets your needs. Don\u0026#39;t use LMS when a simple property or event will do.\u003c/p\u003e\n\u003c/blockquote\u003e\u003ch2 id=\"pattern-1-parent-to-child-communication\" class=\"heading-2  group\"\u003e\n    \u003ca href=\"#pattern-1-parent-to-child-communication\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Pattern 1: Parent to Child Communication\n    \u003c/a\u003e\n  \u003c/h2\u003e\u003ch3 id=\"using-properties\" class=\"heading-3  group\"\u003e\n    \u003ca href=\"#using-properties\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Using Properties\n    \u003c/a\u003e\n  \u003c/h3\u003e\u003cp\u003eThe most straightforward way to pass data from parent to child is through properties.\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eChild Component (productCard.js):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003eimport { LightningElement, api } from 'lwc';\n\nexport default class ProductCard extends LightningElement {\n    // @api makes this property public\n    // ^^^^\n    // PUBLIC PROPERTY = Parent can SET this value\n    // → REQUIRED for parent-to-child data flow\n    @api product;\n\n    @api isSelected = false;\n    // ^^^^^^^^^^^^^^^^^^\n    // DEFAULT VALUE = What happens if parent doesn't set it\n    // 💡 BEST PRACTICE: Always provide sensible defaults\n\n    @api maxPrice;\n    // ^^^^^^^^^^\n    // REACTIVE PROPERTY = Component rerenders when this changes\n    // → Automatically triggers getter/setter if defined\n\n    // Computed property based on @api properties\n    get isDiscounted() {\n        // ^^^^^^^^^^^^^^^^\n        // COMPUTED PROPERTY = Calculated from other properties\n        // → Automatically recalculates when dependencies change\n        return this.product \u0026\u0026 this.product.originalPrice \u003e this.product.currentPrice;\n    }\n\n    get displayPrice() {\n        if (!this.product) return 'N/A';\n\n        // 💡 BEST PRACTICE: Handle null/undefined gracefully\n        return this.product.currentPrice ?\n            `$${this.product.currentPrice.toFixed(2)}` :\n            'Price not available';\n    }\n\n    // Property setter for validation\n    @api\n    get selectedQuantity() {\n        return this._selectedQuantity || 1;\n    }\n\n    set selectedQuantity(value) {\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // SETTER VALIDATION = Ensure data integrity\n        // → Called whenever parent sets this property\n        const numValue = parseInt(value, 10);\n        this._selectedQuantity = numValue \u003e 0 ? numValue : 1;\n\n        // 💀 EXAM TRAP: Setters don't automatically trigger rerenders\n        // You may need to call this.dispatchEvent() for reactive updates\n    }\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003cp\u003e\u003cstrong\u003eChild Component Template (productCard.html):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"html\"\u003e\n    \u003cpre class=\"language-html\"\u003e\u003ccode class=\"language-html\"\u003e\u003ctemplate\u003e\n    \u003cdiv class=\"product-card\" data-id={product.id}\u003e\n        \u003c!-- 💡 CONDITIONAL RENDERING: Only show if product exists --\u003e\n        \u003ctemplate if:true={product}\u003e\n            \u003cdiv class=\"product-image\"\u003e\n                \u003cimg src={product.imageUrl} alt={product.name} /\u003e\n            \u003c/div\u003e\n\n            \u003cdiv class=\"product-details\"\u003e\n                \u003ch3 class=\"product-name\"\u003e{product.name}\u003c/h3\u003e\n\n                \u003c!-- 💡 COMPUTED PROPERTIES: Use getters for dynamic values --\u003e\n                \u003cp class=\"product-price\"\u003e{displayPrice}\u003c/p\u003e\n\n                \u003c!-- 💡 CONDITIONAL CLASSES: Dynamic styling based on state --\u003e\n                \u003cdiv class={productCardClass}\u003e\n                    \u003ctemplate if:true={isDiscounted}\u003e\n                        \u003cspan class=\"discount-badge\"\u003eSale!\u003c/span\u003e\n                    \u003c/template\u003e\n\n                    \u003ctemplate if:true={isSelected}\u003e\n                        \u003cspan class=\"selected-indicator\"\u003e✓ Selected\u003c/span\u003e\n                    \u003c/template\u003e\n                \u003c/div\u003e\n            \u003c/div\u003e\n        \u003c/template\u003e\n\n        \u003c!-- 💡 ERROR STATE: Always handle missing data --\u003e\n        \u003ctemplate if:false={product}\u003e\n            \u003cdiv class=\"error-state\"\u003e\n                \u003cp\u003eProduct information not available\u003c/p\u003e\n            \u003c/div\u003e\n        \u003c/template\u003e\n    \u003c/div\u003e\n\u003c/template\u003e\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003cp\u003e\u003cstrong\u003eParent Component (productList.js):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003eimport { LightningElement, track } from 'lwc';\n\nexport default class ProductList extends LightningElement {\n    @track products = [\n        // 💡 SAMPLE DATA: Real applications would fetch from server\n        {\n            id: '1',\n            name: 'Laptop',\n            currentPrice: 999.99,\n            originalPrice: 1299.99,\n            imageUrl: '/images/laptop.jpg'\n        },\n        {\n            id: '2',\n            name: 'Phone',\n            currentPrice: 799.99,\n            originalPrice: 799.99,\n            imageUrl: '/images/phone.jpg'\n        }\n    ];\n\n    @track selectedProductId = '1';\n    // ^^^^^^^^^^^^^^^^^^^^^^\n    // TRACKED PROPERTY = Component rerenders when this changes\n    // → Use @track for objects/arrays that change internally\n\n    maxBudget = 1000;\n    // ^^^^^^^^^^^^^^^^\n    // SIMPLE PROPERTY = Passed to child as-is\n    // → No @track needed for primitive values that don't change\n\n    // Method that could be called by parent\n    @api\n    refreshProducts() {\n        // ^^^^^^^^^^^^^^^^^\n        // PUBLIC METHOD = Parent can call this method\n        // → Use @api to expose methods to parent components\n        // ⚠️  EXAM TRAP: Only @api methods are accessible to parents\n\n        // Refresh logic here\n        this.loadProducts();\n    }\n\n    loadProducts() {\n        // ^^^^^^^^^^^^^^^\n        // PRIVATE METHOD = Only this component can call\n        // → Don't use @api for internal methods\n\n        // Implementation would fetch fresh data\n        console.log('Loading products...');\n    }\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003cp\u003e\u003cstrong\u003eParent Component Template (productList.html):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"html\"\u003e\n    \u003cpre class=\"language-html\"\u003e\u003ccode class=\"language-html\"\u003e\u003ctemplate\u003e\n    \u003cdiv class=\"product-list\"\u003e\n        \u003ch2\u003eAvailable Products\u003c/h2\u003e\n\n        \u003c!-- 💡 ITERATION: Loop through products array --\u003e\n        \u003ctemplate for:each={products} for:item=\"product\"\u003e\n            \u003c!--\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                 FOR:EACH LOOP = Iterate over array\n                 → MUST include key attribute for performance\n                 💀 EXAM TRAP: Missing key causes render issues\n            --\u003e\n            \u003cc-product-card\n                key={product.id}\n                product={product}\n                is-selected={isProductSelected}\n                max-price={maxBudget}\n                selected-quantity=\"1\"\u003e\n                \u003c!--\n                     ^^^^^^^^^^^^^^^^^^\n                     PROPERTY BINDING = Pass data to child\n                     → kebab-case in template = camelCase in JavaScript\n                     💡 WHY? HTML attributes are case-insensitive\n                --\u003e\n            \u003c/c-product-card\u003e\n        \u003c/template\u003e\n    \u003c/div\u003e\n\u003c/template\u003e\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003ch3 id=\"using-method-calls\" class=\"heading-3  group\"\u003e\n    \u003ca href=\"#using-method-calls\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Using Method Calls\n    \u003c/a\u003e\n  \u003c/h3\u003e\u003cp\u003eParents can also call child methods directly:\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003e// Parent component\nexport default class ProductManager extends LightningElement {\n\n    handleRefreshClick() {\n        // Get reference to child component\n        const productCard = this.template.querySelector('c-product-card');\n\n        if (productCard) {\n            // Call child's public method\n            productCard.refreshData();\n            // ^^^^^^^^^^^^^^^^^^^^\n            // METHOD CALL = Direct invocation of child method\n            // → Only works with @api methods\n            // ⚠️  EXAM TRAP: Non-@api methods are not accessible\n        }\n    }\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003ch2 id=\"pattern-2-child-to-parent-communication\" class=\"heading-2  group\"\u003e\n    \u003ca href=\"#pattern-2-child-to-parent-communication\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Pattern 2: Child to Parent Communication\n    \u003c/a\u003e\n  \u003c/h2\u003e\u003ch3 id=\"using-custom-events\" class=\"heading-3  group\"\u003e\n    \u003ca href=\"#using-custom-events\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Using Custom Events\n    \u003c/a\u003e\n  \u003c/h3\u003e\u003cp\u003eCustom events are the standard way for children to communicate with parents:\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eChild Component (productCard.js):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003eimport { LightningElement, api } from 'lwc';\n\nexport default class ProductCard extends LightningElement {\n    @api product;\n\n    handleAddToCart() {\n        // Create custom event with data\n        const addToCartEvent = new CustomEvent('addtocart', {\n            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            // CUSTOM EVENT = Child-to-parent communication\n            // → Event name should be descriptive and lowercase\n\n            detail: {\n                // ^^^^^^^^\n                // EVENT DETAIL = Data payload for parent\n                // → All event data goes in the detail object\n                productId: this.product.id,\n                productName: this.product.name,\n                quantity: this.selectedQuantity,\n                timestamp: new Date().toISOString()\n            },\n\n            bubbles: true,\n            // ^^^^^^^^^^^^^\n            // BUBBLES = Event travels up the DOM tree\n            // → Usually set to true for parent communication\n            // 💡 WHY? Allows parent containers to catch the event\n\n            composed: false\n            // ^^^^^^^^^^^^^^\n            // COMPOSED = Event crosses shadow DOM boundaries\n            // → Usually false for component-to-component communication\n            // ⚠️  EXAM TRAP: Setting composed=true can cause unwanted behavior\n        });\n\n        // Dispatch the event\n        this.dispatchEvent(addToCartEvent);\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // DISPATCH EVENT = Send event to parent\n        // → Parent must have matching event listener\n    }\n\n    handleQuantityChange(event) {\n        const newQuantity = event.target.value;\n        this.selectedQuantity = newQuantity;\n\n        // Notify parent of quantity change\n        this.dispatchEvent(new CustomEvent('quantitychange', {\n            detail: {\n                productId: this.product.id,\n                newQuantity: parseInt(newQuantity, 10),\n                oldQuantity: this.previousQuantity\n            }\n        }));\n\n        this.previousQuantity = newQuantity;\n    }\n\n    handleProductSelect() {\n        // Simple event without data\n        this.dispatchEvent(new CustomEvent('productselect', {\n            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            // SIMPLE EVENT = No detail needed\n            // → Sometimes you just need to notify parent of action\n\n            detail: { productId: this.product.id }\n        }));\n    }\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003cp\u003e\u003cstrong\u003eChild Component Template (productCard.html):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"html\"\u003e\n    \u003cpre class=\"language-html\"\u003e\u003ccode class=\"language-html\"\u003e\u003ctemplate\u003e\n    \u003cdiv class=\"product-card\"\u003e\n        \u003cdiv class=\"product-info\"\u003e\n            \u003ch3\u003e{product.name}\u003c/h3\u003e\n            \u003cp\u003e{product.price}\u003c/p\u003e\n        \u003c/div\u003e\n\n        \u003cdiv class=\"product-actions\"\u003e\n            \u003c!-- 💡 EVENT HANDLERS: Wire UI events to component methods --\u003e\n            \u003cinput\n                type=\"number\"\n                value={selectedQuantity}\n                onchange={handleQuantityChange}\n                min=\"1\" /\u003e\n                \u003c!--\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                     EVENT BINDING = Connect DOM events to component methods\n                     → onchange, onclick, etc. map to handle* methods\n                --\u003e\n\n            \u003cbutton\n                onclick={handleAddToCart}\n                class=\"add-to-cart-btn\"\u003e\n                Add to Cart\n            \u003c/button\u003e\n\n            \u003cbutton\n                onclick={handleProductSelect}\n                class={selectButtonClass}\u003e\n                {selectButtonLabel}\n            \u003c/button\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n\u003c/template\u003e\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003cp\u003e\u003cstrong\u003eParent Component (productList.js):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003eimport { LightningElement, track } from 'lwc';\n\nexport default class ProductList extends LightningElement {\n    @track cartItems = [];\n    @track selectedProducts = new Set();\n\n    handleAddToCart(event) {\n        // ^^^^^^^^^^^^^^^^^^^^^\n        // EVENT HANDLER = Responds to child component events\n        // → Method name should match the event type\n\n        const productDetails = event.detail;\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // EVENT DETAIL = Extract data from child event\n        // → All event data is in the detail property\n\n        console.log('Adding to cart:', productDetails);\n\n        // Add to cart logic\n        const cartItem = {\n            id: productDetails.productId,\n            name: productDetails.productName,\n            quantity: productDetails.quantity,\n            addedAt: productDetails.timestamp\n        };\n\n        this.cartItems = [...this.cartItems, cartItem];\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // IMMUTABLE UPDATE = Create new array for reactivity\n        // → @track requires new object reference to detect changes\n        // 💀 EXAM TRAP: Mutating arrays directly won't trigger rerenders\n\n        // Dispatch event to grandparent if needed\n        this.dispatchEvent(new CustomEvent('cartupdate', {\n            detail: {\n                cartItems: this.cartItems,\n                action: 'add'\n            }\n        }));\n    }\n\n    handleQuantityChange(event) {\n        const { productId, newQuantity } = event.detail;\n\n        // Update existing cart item\n        this.cartItems = this.cartItems.map(item =\u003e\n            item.id === productId\n                ? { ...item, quantity: newQuantity }\n                : item\n        );\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // FUNCTIONAL UPDATE = Pure function approach\n        // → Creates new array with updated item\n        // 💡 BEST PRACTICE: Prefer immutable updates for clarity\n    }\n\n    handleProductSelect(event) {\n        const productId = event.detail.productId;\n\n        // Toggle selection\n        if (this.selectedProducts.has(productId)) {\n            this.selectedProducts.delete(productId);\n        } else {\n            this.selectedProducts.add(productId);\n        }\n\n        // Force reactivity for Set changes\n        this.selectedProducts = new Set(this.selectedProducts);\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // SET REACTIVITY = Create new Set to trigger rerenders\n        // → @track doesn't detect changes inside Set/Map objects\n        // 💀 EXAM TRAP: Mutating Set/Map without reassignment won't rerender\n    }\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003cp\u003e\u003cstrong\u003eParent Component Template (productList.html):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"html\"\u003e\n    \u003cpre class=\"language-html\"\u003e\u003ccode class=\"language-html\"\u003e\u003ctemplate\u003e\n    \u003cdiv class=\"product-list\"\u003e\n        \u003cdiv class=\"cart-summary\"\u003e\n            \u003ch3\u003eCart ({cartItems.length} items)\u003c/h3\u003e\n        \u003c/div\u003e\n\n        \u003cdiv class=\"products\"\u003e\n            \u003ctemplate for:each={products} for:item=\"product\"\u003e\n                \u003cc-product-card\n                    key={product.id}\n                    product={product}\n                    onaddtocart={handleAddToCart}\n                    onquantitychange={handleQuantityChange}\n                    onproductselect={handleProductSelect}\u003e\n                    \u003c!--\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                         EVENT LISTENERS = Handle child component events\n                         → on + eventname = handler method\n                         💡 Event names are case-sensitive in JavaScript\n                    --\u003e\n                \u003c/c-product-card\u003e\n            \u003c/template\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n\u003c/template\u003e\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003ch2 id=\"pattern-3-lightning-message-service-lms\" class=\"heading-2  group\"\u003e\n    \u003ca href=\"#pattern-3-lightning-message-service-lms\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Pattern 3: Lightning Message Service (LMS)\n    \u003c/a\u003e\n  \u003c/h2\u003e\u003cp\u003eFor sibling or cross-DOM communication, use Lightning Message Service:\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003eMessage Channel (productEvents.messageChannel-meta.xml):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"xml\"\u003e\n    \u003cpre class=\"language-xml\"\u003e\u003ccode class=\"language-xml\"\u003e\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\n\u003cLightningMessageChannel xmlns=\"http://soap.sforce.com/2006/04/metadata\"\u003e\n    \u003cmasterLabel\u003eProduct Events\u003c/masterLabel\u003e\n    \u003cisExposed\u003etrue\u003c/isExposed\u003e\n    \u003cdescription\u003eChannel for product-related events across components\u003c/description\u003e\n    \u003clightningMessageFields\u003e\n        \u003cfieldName\u003eaction\u003c/fieldName\u003e\n        \u003cdescription\u003eThe action being performed\u003c/description\u003e\n    \u003c/lightningMessageFields\u003e\n    \u003clightningMessageFields\u003e\n        \u003cfieldName\u003eproductId\u003c/fieldName\u003e\n        \u003cdescription\u003eID of the product\u003c/description\u003e\n    \u003c/lightningMessageFields\u003e\n    \u003clightningMessageFields\u003e\n        \u003cfieldName\u003eproductData\u003c/fieldName\u003e\n        \u003cdescription\u003eAdditional product data\u003c/description\u003e\n    \u003c/lightningMessageFields\u003e\n\u003c/LightningMessageChannel\u003e\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003cp\u003e\u003cstrong\u003ePublisher Component (productActions.js):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003eimport { LightningElement, wire } from 'lwc';\nimport { publish, MessageContext } from 'lightning/messageService';\nimport PRODUCT_EVENTS_CHANNEL from '@salesforce/messageChannel/ProductEvents__c';\n\nexport default class ProductActions extends LightningElement {\n\n    @wire(MessageContext)\n    messageContext;\n    // ^^^^^^^^^^^^^^^\n    // MESSAGE CONTEXT = Required for LMS operations\n    // → Wire this to get the messaging context\n    // 💀 EXAM TRAP: Forgetting @wire(MessageContext) breaks LMS\n\n    handleProductUpdate(event) {\n        const productId = event.target.dataset.productId;\n\n        // Publish message to all subscribers\n        const message = {\n            // ^^^^^^^^^^^^^^^\n            // MESSAGE PAYLOAD = Data sent to all subscribers\n            // → Structure must match messageChannel definition\n            action: 'update',\n            productId: productId,\n            productData: {\n                timestamp: new Date().toISOString(),\n                updatedBy: 'ProductActions'\n            }\n        };\n\n        publish(this.messageContext, PRODUCT_EVENTS_CHANNEL, message);\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // PUBLISH = Send message to all subscribers\n        // → Requires: messageContext, channel, message payload\n        // 💡 BEST PRACTICE: Always check messageContext exists\n\n        if (this.messageContext) {\n            publish(this.messageContext, PRODUCT_EVENTS_CHANNEL, message);\n        } else {\n            console.error('Message context not available');\n        }\n    }\n\n    handleProductDelete(event) {\n        const productId = event.target.dataset.productId;\n\n        publish(this.messageContext, PRODUCT_EVENTS_CHANNEL, {\n            action: 'delete',\n            productId: productId,\n            productData: { deletedAt: new Date() }\n        });\n    }\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003cp\u003e\u003cstrong\u003eSubscriber Component (productNotifications.js):\u003c/strong\u003e\u003c/p\u003e\n\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003eimport { LightningElement, wire } from 'lwc';\nimport { subscribe, unsubscribe, MessageContext } from 'lightning/messageService';\nimport PRODUCT_EVENTS_CHANNEL from '@salesforce/messageChannel/ProductEvents__c';\n\nexport default class ProductNotifications extends LightningElement {\n    subscription = null;\n    notifications = [];\n\n    @wire(MessageContext)\n    messageContext;\n\n    connectedCallback() {\n        // ^^^^^^^^^^^^^^^^^\n        // LIFECYCLE HOOK = Component is inserted into DOM\n        // → Perfect place to set up subscriptions\n        this.subscribeToMessageChannel();\n    }\n\n    disconnectedCallback() {\n        // ^^^^^^^^^^^^^^^^^^^^\n        // LIFECYCLE HOOK = Component is removed from DOM\n        // → CRITICAL: Unsubscribe to prevent memory leaks\n        this.unsubscribeFromMessageChannel();\n    }\n\n    subscribeToMessageChannel() {\n        if (!this.subscription) {\n            this.subscription = subscribe(\n                this.messageContext,\n                PRODUCT_EVENTS_CHANNEL,\n                this.handleProductEvent.bind(this)\n            );\n            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            // SUBSCRIBE = Listen for messages on channel\n            // → Returns subscription object for later unsubscribe\n            // 💀 EXAM TRAP: Forgetting .bind(this) loses component context\n        }\n    }\n\n    unsubscribeFromMessageChannel() {\n        if (this.subscription) {\n            unsubscribe(this.subscription);\n            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            // UNSUBSCRIBE = Stop listening and free memory\n            // → CRITICAL for preventing memory leaks\n            this.subscription = null;\n        }\n    }\n\n    handleProductEvent(message) {\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // MESSAGE HANDLER = Process received messages\n        // → Receives the full message payload\n\n        console.log('Received product event:', message);\n\n        const notification = {\n            id: Date.now(),\n            message: `Product ${message.action}: ${message.productId}`,\n            timestamp: new Date().toLocaleTimeString(),\n            type: message.action\n        };\n\n        // Add notification to list\n        this.notifications = [notification, ...this.notifications];\n        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        // IMMUTABLE UPDATE = Add to front of array\n        // → Creates new array for reactivity\n\n        // Auto-remove after 5 seconds\n        setTimeout(() =\u003e {\n            this.removeNotification(notification.id);\n        }, 5000);\n    }\n\n    removeNotification(notificationId) {\n        this.notifications = this.notifications.filter(\n            notif =\u003e notif.id !== notificationId\n        );\n    }\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003ch2 id=\"anti-patterns-to-avoid\" class=\"heading-2  group\"\u003e\n    \u003ca href=\"#anti-patterns-to-avoid\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Anti-Patterns to Avoid\n    \u003c/a\u003e\n  \u003c/h2\u003e\u003cblockquote class=\"border-l-4 border-gray-300 dark:border-gray-600 pl-4 py-2 my-4 italic text-gray-700 dark:text-gray-300\"\u003e\u003cp\u003e⚠️ \u003cstrong\u003eWARNING\u003c/strong\u003e: These patterns are commonly misused and cause bugs!\u003c/p\u003e\n\u003c/blockquote\u003e\u003ch3 id=\"don39t-use-dom-manipulation-for-communication\" class=\"heading-3  group\"\u003e\n    \u003ca href=\"#don39t-use-dom-manipulation-for-communication\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      ❌ Don\u0026#39;t: Use DOM Manipulation for Communication\n    \u003c/a\u003e\n  \u003c/h3\u003e\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003e// BAD - Direct DOM manipulation\nhandleClick() {\n    const siblingComponent = document.querySelector('c-sibling');\n    siblingComponent.someProperty = 'new value'; // Fragile and unreliable\n}\n\n// GOOD - Use LMS or events\nhandleClick() {\n    publish(this.messageContext, CHANNEL, { newValue: 'new value' });\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003ch3 id=\"don39t-mutate-props-in-child-components\" class=\"heading-3  group\"\u003e\n    \u003ca href=\"#don39t-mutate-props-in-child-components\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      ❌ Don\u0026#39;t: Mutate Props in Child Components\n    \u003c/a\u003e\n  \u003c/h3\u003e\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003e// BAD - Mutating parent data\n@api product;\n\nhandleUpdate() {\n    this.product.name = 'Updated Name'; // Violates data flow principles\n}\n\n// GOOD - Dispatch event to parent\nhandleUpdate() {\n    this.dispatchEvent(new CustomEvent('updateproduct', {\n        detail: { id: this.product.id, newName: 'Updated Name' }\n    }));\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003ch3 id=\"don39t-create-memory-leaks-with-lms\" class=\"heading-3  group\"\u003e\n    \u003ca href=\"#don39t-create-memory-leaks-with-lms\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      ❌ Don\u0026#39;t: Create Memory Leaks with LMS\n    \u003c/a\u003e\n  \u003c/h3\u003e\u003cdiv class=\"code-block-wrapper\" data-language=\"javascript\"\u003e\n    \u003cpre class=\"language-javascript\"\u003e\u003ccode class=\"language-javascript\"\u003e// BAD - No cleanup\nconnectedCallback() {\n    subscribe(this.messageContext, CHANNEL, this.handler);\n    // Missing unsubscribe = memory leak\n}\n\n// GOOD - Proper cleanup\nconnectedCallback() {\n    this.subscription = subscribe(this.messageContext, CHANNEL, this.handler);\n}\n\ndisconnectedCallback() {\n    if (this.subscription) {\n        unsubscribe(this.subscription);\n    }\n}\u003c/code\u003e\u003c/pre\u003e\n  \u003c/div\u003e\u003ch2 id=\"summary\" class=\"heading-2  group\"\u003e\n    \u003ca href=\"#summary\" class=\"anchor-link opacity-0 group-hover:opacity-100 transition-opacity\"\u003e\n      Summary\n    \u003c/a\u003e\n  \u003c/h2\u003e\u003cp\u003eChoose the right communication pattern based on your needs:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eParent → Child\u003c/strong\u003e: Use \u003ccode\u003e@api\u003c/code\u003e properties and method calls\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eChild → Parent\u003c/strong\u003e: Use custom events with \u003ccode\u003edispatchEvent\u003c/code\u003e\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eSibling/Cross-DOM\u003c/strong\u003e: Use Lightning Message Service\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eComplex Scenarios\u003c/strong\u003e: Combine patterns as needed\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eRemember to always clean up subscriptions and handle edge cases gracefully!\u003c/p\u003e\n"])</script><script>self.__next_f.push([1,"5:[\"$\",\"div\",null,{\"className\":\"min-h-screen bg-gray-50 dark:bg-gray-900\",\"children\":[[\"$\",\"div\",null,{\"className\":\"bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700\",\"children\":[\"$\",\"div\",null,{\"className\":\"container mx-auto px-4 sm:px-6 lg:px-8 py-4\",\"children\":[\"$\",\"nav\",null,{\"className\":\"flex items-center space-x-2 text-sm\",\"children\":[[\"$\",\"$Lc\",null,{\"href\":\"/\",\"className\":\"text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200\",\"children\":\"Home\"}],[\"$\",\"span\",null,{\"className\":\"text-gray-400 dark:text-gray-600\",\"children\":\"/\"}],[\"$\",\"$Lc\",null,{\"href\":\"/tutorials\",\"className\":\"text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200\",\"children\":\"Tutorials\"}],[\"$\",\"span\",null,{\"className\":\"text-gray-400 dark:text-gray-600\",\"children\":\"/\"}],[\"$\",\"$Lc\",null,{\"href\":\"/tutorials/lwc\",\"className\":\"text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 capitalize\",\"children\":\"lwc\"}],[\"$\",\"span\",null,{\"className\":\"text-gray-400 dark:text-gray-600\",\"children\":\"/\"}],[\"$\",\"span\",null,{\"className\":\"text-gray-900 dark:text-gray-100 font-medium\",\"children\":\"LWC Component Communication Patterns\"}]]}]}]}],[\"$\",\"div\",null,{\"className\":\"container mx-auto px-4 sm:px-6 lg:px-8 py-8\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex flex-col lg:flex-row gap-8\",\"children\":[[\"$\",\"article\",null,{\"className\":\"flex-1 max-w-none\",\"children\":[[\"$\",\"header\",null,{\"className\":\"bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 mb-8\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex items-start justify-between mb-6\",\"children\":[\"$\",\"div\",null,{\"className\":\"flex items-center space-x-3\",\"children\":[[\"$\",\"span\",null,{\"className\":\"px-3 py-1 text-sm font-medium rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400\",\"children\":\"LWC\"}],[\"$\",\"span\",null,{\"className\":\"px-3 py-1 text-sm font-medium rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400\",\"children\":\"intermediate\"}],[\"$\",\"span\",null,{\"className\":\"px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 rounded-full\",\"children\":\"Featured\"}]]}]}],[\"$\",\"h1\",null,{\"className\":\"text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4\",\"children\":\"LWC Component Communication Patterns\"}],[\"$\",\"p\",null,{\"className\":\"text-xl text-gray-600 dark:text-gray-400 mb-6\",\"children\":\"Master Lightning Web Component communication patterns including parent-child properties, custom events, and Lightning Message Service for complex scenarios.\"}],[\"$\",\"div\",null,{\"className\":\"flex flex-wrap items-center gap-6 text-sm text-gray-500 dark:text-gray-400 mb-6\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-user h-4 w-4 mr-2\",\"children\":[[\"$\",\"path\",\"975kel\",{\"d\":\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"}],[\"$\",\"circle\",\"17ys0d\",{\"cx\":\"12\",\"cy\":\"7\",\"r\":\"4\"}],\"$undefined\"]}],\"Apex Academy\"]}],[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-clock h-4 w-4 mr-2\",\"children\":[[\"$\",\"circle\",\"1mglay\",{\"cx\":\"12\",\"cy\":\"12\",\"r\":\"10\"}],[\"$\",\"polyline\",\"68esgv\",{\"points\":\"12 6 12 12 16 14\"}],\"$undefined\"]}],\"11 min read\"]}],[\"$\",\"div\",null,{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-circle-check-big h-4 w-4 mr-2\",\"children\":[[\"$\",\"path\",\"g774vq\",{\"d\":\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"}],[\"$\",\"path\",\"1pflzl\",{\"d\":\"m9 11 3 3L22 4\"}],\"$undefined\"]}],\"Updated \",\"January 15, 2025\"]}]]}],[\"$\",\"div\",null,{\"className\":\"flex flex-wrap gap-2\",\"children\":[[\"$\",\"span\",\"lwc\",{\"className\":\"inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-tag h-3 w-3 mr-1\",\"children\":[[\"$\",\"path\",\"vktsd0\",{\"d\":\"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z\"}],[\"$\",\"circle\",\"kqv944\",{\"cx\":\"7.5\",\"cy\":\"7.5\",\"r\":\".5\",\"fill\":\"currentColor\"}],\"$undefined\"]}],\"lwc\"]}],[\"$\",\"span\",\"component-communication\",{\"className\":\"inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-tag h-3 w-3 mr-1\",\"children\":[[\"$\",\"path\",\"vktsd0\",{\"d\":\"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z\"}],[\"$\",\"circle\",\"kqv944\",{\"cx\":\"7.5\",\"cy\":\"7.5\",\"r\":\".5\",\"fill\":\"currentColor\"}],\"$undefined\"]}],\"component-communication\"]}],[\"$\",\"span\",\"events\",{\"className\":\"inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-tag h-3 w-3 mr-1\",\"children\":[[\"$\",\"path\",\"vktsd0\",{\"d\":\"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z\"}],[\"$\",\"circle\",\"kqv944\",{\"cx\":\"7.5\",\"cy\":\"7.5\",\"r\":\".5\",\"fill\":\"currentColor\"}],\"$undefined\"]}],\"events\"]}],[\"$\",\"span\",\"lms\",{\"className\":\"inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-tag h-3 w-3 mr-1\",\"children\":[[\"$\",\"path\",\"vktsd0\",{\"d\":\"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z\"}],[\"$\",\"circle\",\"kqv944\",{\"cx\":\"7.5\",\"cy\":\"7.5\",\"r\":\".5\",\"fill\":\"currentColor\"}],\"$undefined\"]}],\"lms\"]}],[\"$\",\"span\",\"properties\",{\"className\":\"inline-flex items-center px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-tag h-3 w-3 mr-1\",\"children\":[[\"$\",\"path\",\"vktsd0\",{\"d\":\"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z\"}],[\"$\",\"circle\",\"kqv944\",{\"cx\":\"7.5\",\"cy\":\"7.5\",\"r\":\".5\",\"fill\":\"currentColor\"}],\"$undefined\"]}],\"properties\"]}]]}],[\"$\",\"div\",null,{\"className\":\"mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg\",\"children\":[[\"$\",\"h3\",null,{\"className\":\"text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2\",\"children\":\"Prerequisites\"}],[\"$\",\"ul\",null,{\"className\":\"text-sm text-blue-800 dark:text-blue-200 space-y-1\",\"children\":[[\"$\",\"li\",\"0\",{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-book-open h-3 w-3 mr-2 flex-shrink-0\",\"children\":[[\"$\",\"path\",\"vv98re\",{\"d\":\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"}],[\"$\",\"path\",\"1cyq3y\",{\"d\":\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"}],\"$undefined\"]}],\"lwc-basics\"]}],[\"$\",\"li\",\"1\",{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-book-open h-3 w-3 mr-2 flex-shrink-0\",\"children\":[[\"$\",\"path\",\"vv98re\",{\"d\":\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"}],[\"$\",\"path\",\"1cyq3y\",{\"d\":\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"}],\"$undefined\"]}],\"javascript-fundamentals\"]}],[\"$\",\"li\",\"2\",{\"className\":\"flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"xmlns\":\"http://www.w3.org/2000/svg\",\"width\":24,\"height\":24,\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"stroke\":\"currentColor\",\"strokeWidth\":2,\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\",\"className\":\"lucide lucide-book-open h-3 w-3 mr-2 flex-shrink-0\",\"children\":[[\"$\",\"path\",\"vv98re\",{\"d\":\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"}],[\"$\",\"path\",\"1cyq3y\",{\"d\":\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"}],\"$undefined\"]}],\"dom-events\"]}]]}]]}]]}],[\"$\",\"div\",null,{\"className\":\"bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8\",\"children\":[\"$\",\"div\",null,{\"className\":\"prose prose-lg dark:prose-dark max-w-none\",\"dangerouslySetInnerHTML\":{\"__html\":\"$10\"}}]}]]}],[\"$\",\"aside\",null,{\"className\":\"lg:w-80 space-y-6\",\"children\":[[\"$\",\"$L11\",null,{\"items\":[{\"id\":\"lwc-component-communication-patterns\",\"title\":\"LWC Component Communication Patterns\",\"level\":1},{\"id\":\"overview-of-communication-patterns\",\"title\":\"Overview of Communication Patterns\",\"level\":2},{\"id\":\"pattern-1-parent-to-child-communication\",\"title\":\"Pattern 1: Parent to Child Communication\",\"level\":2},{\"id\":\"using-properties\",\"title\":\"Using Properties\",\"level\":3},{\"id\":\"using-method-calls\",\"title\":\"Using Method Calls\",\"level\":3},{\"id\":\"pattern-2-child-to-parent-communication\",\"title\":\"Pattern 2: Child to Parent Communication\",\"level\":2},{\"id\":\"using-custom-events\",\"title\":\"Using Custom Events\",\"level\":3},{\"id\":\"pattern-3-lightning-message-service-lms\",\"title\":\"Pattern 3: Lightning Message Service (LMS)\",\"level\":2},{\"id\":\"anti-patterns-to-avoid\",\"title\":\"Anti-Patterns to Avoid\",\"level\":2},{\"id\":\"dont-use-dom-manipulation-for-communication\",\"title\":\"❌ Don't: Use DOM Manipulation for Communication\",\"level\":3},{\"id\":\"dont-mutate-props-in-child-components\",\"title\":\"❌ Don't: Mutate Props in Child Components\",\"level\":3},{\"id\":\"dont-create-memory-leaks-with-lms\",\"title\":\"❌ Don't: Create Memory Leaks with LMS\",\"level\":3},{\"id\":\"summary\",\"title\":\"Summary\",\"level\":2}]}],false,[\"$\",\"div\",null,{\"className\":\"bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6\",\"children\":[[\"$\",\"h3\",null,{\"className\":\"text-lg font-semibold text-gray-900 dark:text-white mb-4\",\"children\":\"Tutorial Progress\"}],[\"$\",\"div\",null,{\"className\":\"space-y-3\",\"children\":[[\"$\",\"div\",null,{\"className\":\"flex justify-between text-sm\",\"children\":[[\"$\",\"span\",null,{\"className\":\"text-gray-600 dark:text-gray-400\",\"children\":\"Reading Progress\"}],[\"$\",\"span\",null,{\"className\":\"text-gray-900 dark:text-white font-medium\",\"children\":\"0%\"}]]}],[\"$\",\"div\",null,{\"className\":\"w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2\",\"children\":[\"$\",\"div\",null,{\"className\":\"progress-bar bg-blue-600 h-2 rounded-full w-0\"}]}],[\"$\",\"button\",null,{\"className\":\"w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition-colors\",\"children\":\"Mark as Complete\"}],[\"$\",\"button\",null,{\"className\":\"w-full px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors\",\"children\":\"Bookmark Tutorial\"}]]}]]}]]}]]}],false]}]]}]\n"])</script><script>self.__next_f.push([1,"d:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"LWC Component Communication Patterns | Apex Academy\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"Master Lightning Web Component communication patterns including parent-child properties, custom events, and Lightning Message Service for complex scenarios.\"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"Apex Academy\"}],[\"$\",\"meta\",\"5\",{\"name\":\"keywords\",\"content\":\"lwc, component-communication, events, lms, properties\"}],[\"$\",\"meta\",\"6\",{\"name\":\"creator\",\"content\":\"Apex Academy\"}],[\"$\",\"meta\",\"7\",{\"name\":\"publisher\",\"content\":\"Apex Academy\"}],[\"$\",\"meta\",\"8\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"meta\",\"9\",{\"name\":\"googlebot\",\"content\":\"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1\"}],[\"$\",\"meta\",\"10\",{\"name\":\"google-site-verification\",\"content\":\"your-google-verification-code\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:title\",\"content\":\"LWC Component Communication Patterns\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:description\",\"content\":\"Master Lightning Web Component communication patterns including parent-child properties, custom events, and Lightning Message Service for complex scenarios.\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:type\",\"content\":\"article\"}],[\"$\",\"meta\",\"14\",{\"property\":\"article:modified_time\",\"content\":\"2025-01-15\"}],[\"$\",\"meta\",\"15\",{\"property\":\"article:author\",\"content\":\"Apex Academy\"}],[\"$\",\"meta\",\"16\",{\"property\":\"article:tag\",\"content\":\"lwc\"}],[\"$\",\"meta\",\"17\",{\"property\":\"article:tag\",\"content\":\"component-communication\"}],[\"$\",\"meta\",\"18\",{\"property\":\"article:tag\",\"content\":\"events\"}],[\"$\",\"meta\",\"19\",{\"property\":\"article:tag\",\"content\":\"lms\"}],[\"$\",\"meta\",\"20\",{\"property\":\"article:tag\",\"content\":\"properties\"}],[\"$\",\"meta\",\"21\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"22\",{\"name\":\"twitter:title\",\"content\":\"LWC Component Communication Patterns\"}],[\"$\",\"meta\",\"23\",{\"name\":\"twitter:description\",\"content\":\"Master Lightning Web Component communication patterns including parent-child properties, custom events, and Lightning Message Service for complex scenarios.\"}],[\"$\",\"meta\",\"24\",{\"name\":\"next-size-adjust\"}]]\n"])</script><script>self.__next_f.push([1,"4:null\n"])</script></body></html>
