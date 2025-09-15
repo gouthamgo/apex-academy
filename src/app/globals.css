@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+  body {
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+  }
+}
+
+/* Custom scrollbar styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-gray-600 {
+  scrollbar-color: #4b5563 #1f2937;
+}
+
+.scrollbar-track-gray-800 {
+  /* No change needed for webkit scrollbars in this context */
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Prism.js theme overrides */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+.token.punctuation {
+  @apply text-gray-400 dark:text-gray-300;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-red-400 dark:text-red-300;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-green-400 dark:text-green-300;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-400 dark:text-yellow-300;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-blue-400 dark:text-blue-300;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-purple-400 dark:text-purple-300;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-orange-400 dark:text-orange-300;
+}
+
+.token.annotation {
+  @apply text-purple-400 dark:text-purple-300 font-medium;
+}
+
+/* Custom table of contents styles */
+.toc-item {
+  @apply transition-all duration-200;
+}
+
+.toc-item.active {
+  @apply text-blue-600 dark:text-blue-400 font-medium;
+}
+
+.toc-item.active::before {
+  @apply content-[''] absolute left-0 top-0 bottom-0 w-0.5 bg-blue-600 dark:bg-blue-400;
+}
+
+/* Progress indicator */
+.progress-bar {
+  transition: width 0.3s ease-out;
+}
+
+/* Animation for tutorial cards */
+.tutorial-card {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Focus styles for accessibility */
+.focus-visible\:ring-2:focus-visible {
+  @apply ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+}
+
+/* Topic Page Content Styling */
+.prose h1 {
+  @apply text-3xl font-bold text-gray-900 dark:text-white mb-6 mt-8 pb-3 border-b-2 border-blue-200 dark:border-blue-800;
+}
+
+.prose h1:first-child {
+  @apply mt-0;
+}
+
+/* Section separators */
+.prose hr {
+  @apply my-12 border-t-2 border-gray-200 dark:border-gray-700;
+}
+
+/* Section-specific styling */
+.prose h1.section-concepts {
+  @apply text-green-600 dark:text-green-400 border-green-200 dark:border-green-800;
+}
+
+.prose h1.section-code {
+  @apply text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800;
+}
+
+.prose h1.section-gotchas {
+  @apply text-red-600 dark:text-red-400 border-red-200 dark:border-red-800;
+}
+
+.prose h1.section-exam {
+  @apply text-yellow-600 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800;
+}
+
+.prose h1.section-practice {
+  @apply text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800;
+}
+
+.prose h1.section-conversion {
+  @apply text-orange-600 dark:text-orange-400 border-orange-200 dark:border-orange-800;
+}
+
+.prose h1.section-constants {
+  @apply text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800;
+}
+
+.prose h1.section-related {
+  @apply text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-600;
+}
+
+/* Code block improvements */
+.prose pre {
+  @apply bg-gray-900 dark:bg-gray-950 text-gray-100 p-6 rounded-lg my-6 overflow-x-auto border border-gray-700 dark:border-gray-600;
+}
+
+.prose code {
+  @apply text-sm font-mono;
+}
+
+.prose p code {
+  @apply bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1 py-0.5 rounded text-sm;
+}
+
+/* Fix react-syntax-highlighter white backgrounds */
+.react-syntax-highlighter-line-number,
+.prism-code .token-line,
+.token-line,
+code[class*="language-"] .token-line,
+pre[class*="language-"] .token-line,
+.hljs-ln-line,
+.hljs-ln-numbers,
+.hljs-ln-code,
+.code-line {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Ensure syntax highlighter container has dark background */
+.react-syntax-highlighter,
+code[class*="language-"],
+pre[class*="language-"] {
+  background: #0f0f0f !important;
+  background-color: #0f0f0f !important;
+}
+
+/* Remove any white backgrounds from syntax highlighting tokens */
+.token {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Enhance blockquotes and callouts */
+.prose blockquote {
+  @apply border-l-4 border-gray-300 dark:border-gray-600 pl-6 py-4 my-6 bg-gray-50 dark:bg-gray-800/50 rounded-r-lg;
+}
+
+/* List styling improvements */
+.prose ul {
+  @apply space-y-2;
+}
+
+.prose ul li {
+  @apply relative pl-6;
+}
+
+.prose ul li::before {
+  @apply content-['•'] absolute left-0 text-blue-500 dark:text-blue-400 font-bold;
+}
+
+/* Strong text highlighting */
+.prose strong {
+  @apply text-gray-900 dark:text-white font-semibold;
+}
+
+/* Link styling */
+.prose a {
+  @apply text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-break-before {
+    break-before: page;
+  }
+
+  .print-break-after {
+    break-after: page;
+  }
+}
