@@ -1,11 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Clock, TrendingUp, CheckCircle, ArrowRight, BookOpen } from 'lucide-react';
-import { getTopicBySlug, getRelatedTopics, getTopicsBySection } from '@/lib/topics';
-import { markdownToHtml } from '@/lib/markdown';
-import { TableOfContents } from '@/components/table-of-contents';
-import { CodeBlock } from '@/components/code-block';
+import { ArrowLeft, Clock, TrendingUp, CheckCircle, ArrowRight, BookOpen, Code2, Lightbulb } from 'lucide-react';
+import { topicContent } from '@/data/topicContent';
+import { PracticeSection } from '@/components/practice-section';
 import { cn } from '@/lib/utils';
 
 interface TopicPageProps {
@@ -16,16 +14,16 @@ interface TopicPageProps {
 
 // Generate static params for all Apex topics
 export async function generateStaticParams() {
-  const topics = getTopicsBySection('apex');
+  const topicSlugs = Object.keys(topicContent);
 
-  return topics.map((topic) => ({
-    slug: topic.slug,
+  return topicSlugs.map((slug) => ({
+    slug: slug,
   }));
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: TopicPageProps): Promise<Metadata> {
-  const topic = getTopicBySlug(params.slug, 'apex');
+  const topic = topicContent[params.slug];
 
   if (!topic) {
     return {
@@ -33,38 +31,38 @@ export async function generateMetadata({ params }: TopicPageProps): Promise<Meta
     };
   }
 
-  const { frontmatter } = topic;
-
   return {
-    title: `${frontmatter.title} - Apex Fundamentals`,
-    description: frontmatter.description,
-    keywords: [...frontmatter.concepts, 'Apex', 'Salesforce', 'Programming'],
+    title: `${topic.title} - Apex Fundamentals`,
+    description: topic.overview,
+    keywords: ['Apex', 'Salesforce', 'Programming'],
     authors: [{ name: 'Apex Academy' }],
     openGraph: {
-      title: `${frontmatter.title} - Apex Fundamentals`,
-      description: frontmatter.description,
+      title: `${topic.title} - Apex Fundamentals`,
+      description: topic.overview,
       type: 'article',
-      tags: frontmatter.concepts,
     },
   };
 }
 
 export default async function TopicPage({ params }: TopicPageProps) {
-  const topic = getTopicBySlug(params.slug, 'apex');
+  const topic = topicContent[params.slug];
 
   if (!topic) {
     notFound();
   }
 
-  const { frontmatter, content, readingTime } = topic;
-  const { html, tableOfContents } = await markdownToHtml(content);
-  const relatedTopics = getRelatedTopics(params.slug);
-  const allTopics = getTopicsBySection('apex');
+  const allTopicSlugs = Object.keys(topicContent);
 
   // Find current topic index for navigation
-  const currentIndex = allTopics.findIndex(t => t.slug === params.slug);
-  const previousTopic = currentIndex > 0 ? allTopics[currentIndex - 1] : null;
-  const nextTopic = currentIndex < allTopics.length - 1 ? allTopics[currentIndex + 1] : null;
+  const currentIndex = allTopicSlugs.findIndex(slug => slug === params.slug);
+  const previousSlug = currentIndex > 0 ? allTopicSlugs[currentIndex - 1] : null;
+  const nextSlug = currentIndex < allTopicSlugs.length - 1 ? allTopicSlugs[currentIndex + 1] : null;
+
+  const previousTopic = previousSlug ? { slug: previousSlug, title: topicContent[previousSlug].title } : null;
+  const nextTopic = nextSlug ? { slug: nextSlug, title: topicContent[nextSlug].title } : null;
+
+  // Estimated reading time based on content length
+  const readingTime = Math.ceil((topic.overview.length + topic.codeExamples.reduce((acc, ex) => acc + ex.code.length + ex.explanation.length, 0)) / 1000);
 
   const difficultyColors = {
     beginner: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
@@ -93,7 +91,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             </Link>
             <span className="text-gray-400 dark:text-gray-600">/</span>
             <span className="text-gray-900 dark:text-gray-100 font-medium">
-              {frontmatter.title}
+              {topic.title}
             </span>
           </nav>
         </div>
@@ -108,105 +106,74 @@ export default async function TopicPage({ params }: TopicPageProps) {
               {/* Main Title Section */}
               <div className="p-8 pb-6">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-                  {frontmatter.title}
+                  {topic.title}
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-                  {frontmatter.description}
+                  {topic.overview}
                 </p>
               </div>
 
               {/* Topic Meta Bar */}
               <div className="px-8 py-4 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-600 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center space-x-4">
-                  <span
-                    className={cn(
-                      'px-3 py-1 text-sm font-medium rounded-full',
-                      difficultyColors[frontmatter.difficulty]
-                    )}
-                  >
-                    {frontmatter.difficulty.charAt(0).toUpperCase() + frontmatter.difficulty.slice(1)} Level
+                  <span className="px-3 py-1 text-sm font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+                    Beginner Level
                   </span>
                   <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                     <Clock className="h-4 w-4 mr-1" />
-                    {readingTime.text}
+                    {readingTime} min read
                   </div>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
-                    Topic {currentIndex + 1} of {allTopics.length}
+                    Topic {currentIndex + 1} of {allTopicSlugs.length}
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  {frontmatter.examWeight === 'high' && (
-                    <span className="px-3 py-1 text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 rounded-full">
-                      High Exam Weight
-                    </span>
-                  )}
+                  <span className="px-3 py-1 text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 rounded-full">
+                    High Exam Weight
+                  </span>
                   <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                    <BookOpen className="h-4 w-4 mr-1" />
-                    {frontmatter.concepts.length} key concepts
+                    <Code2 className="h-4 w-4 mr-1" />
+                    {topic.codeExamples.length} code examples
                   </div>
                 </div>
               </div>
 
             </header>
 
-            {/* Overview Section */}
-            <section className="overview bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                📖 Overview
+            {/* Code Examples Section */}
+            <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                <Code2 className="h-6 w-6 mr-2" />
+                Code Examples
               </h2>
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
-                <p className="text-blue-800 dark:text-blue-200 leading-relaxed">
-                  {frontmatter.overview}
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Learning Objectives */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">You'll Learn:</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {frontmatter.concepts.map((concept) => (
-                      <span
-                        key={concept}
-                        className="px-3 py-1 text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-md"
-                      >
-                        {concept}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Prerequisites & Meta */}
-                <div className="space-y-4">
-                  {frontmatter.prerequisites.length > 0 && (
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Prerequisites:</h3>
-                      <div className="space-y-1">
-                        {frontmatter.prerequisites.map((prerequisite) => (
-                          <div key={prerequisite} className="text-sm text-gray-600 dark:text-gray-400 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-1 rounded-md">
-                            📚 {prerequisite}
-                          </div>
-                        ))}
+              <div className="space-y-8">
+                {topic.codeExamples.map((example, index) => (
+                  <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden">
+                    <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 border-b border-gray-200 dark:border-gray-600">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                        {example.title}
+                      </h3>
+                    </div>
+                    <div className="bg-gray-900 p-4">
+                      <pre className="text-green-400 text-sm overflow-x-auto">
+                        <code>{example.code}</code>
+                      </pre>
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-start gap-3">
+                        <Lightbulb className="h-5 w-5 text-yellow-500 mt-0.5 flex-shrink-0" />
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                          {example.explanation}
+                        </p>
                       </div>
                     </div>
-                  )}
-                  <div className="text-sm text-gray-500 dark:text-gray-400">
-                    <div className="flex items-center mb-1">
-                      <TrendingUp className="h-4 w-4 mr-2" />
-                      Updated {new Date(frontmatter.lastUpdated).toLocaleDateString()}
-                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </section>
 
-            {/* Topic Content */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8">
-              <div
-                className="prose prose-lg dark:prose-dark max-w-none"
-                dangerouslySetInnerHTML={{ __html: html }}
-              />
-            </div>
+            {/* Practice Questions */}
+            <PracticeSection topicName={topic.title} questions={topic.practiceQuestions} />
 
             {/* Topic Navigation */}
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -220,7 +187,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
                     Previous Topic
                   </div>
                   <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {previousTopic.frontmatter.title}
+                    {previousTopic.title}
                   </h4>
                 </Link>
               ) : (
@@ -240,7 +207,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
                     <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </div>
                   <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {nextTopic.frontmatter.title}
+                    {nextTopic.title}
                   </h4>
                 </Link>
               ) : (
@@ -254,11 +221,6 @@ export default async function TopicPage({ params }: TopicPageProps) {
 
           {/* Sidebar */}
           <aside className="lg:w-80 space-y-6">
-            {/* Table of Contents */}
-            {tableOfContents.length > 0 && (
-              <TableOfContents items={tableOfContents} />
-            )}
-
             {/* Topic Progress */}
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
@@ -266,11 +228,12 @@ export default async function TopicPage({ params }: TopicPageProps) {
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">Reading Progress</span>
-                  <span className="text-gray-900 dark:text-white font-medium">0%</span>
+                  <span className="text-gray-600 dark:text-gray-400">Code Examples</span>
+                  <span className="text-gray-900 dark:text-white font-medium">{topic.codeExamples.length}</span>
                 </div>
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                  <div className="progress-bar bg-blue-600 h-2 rounded-full w-0"></div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600 dark:text-gray-400">Practice Questions</span>
+                  <span className="text-gray-900 dark:text-white font-medium">{topic.practiceQuestions.length}</span>
                 </div>
                 <button className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md transition-colors">
                   Mark as Complete
@@ -278,56 +241,26 @@ export default async function TopicPage({ params }: TopicPageProps) {
               </div>
             </div>
 
-            {/* Related Topics */}
-            {relatedTopics.length > 0 && (
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Related Topics
-                </h3>
-                <div className="space-y-4">
-                  {relatedTopics.map((relatedTopic) => (
-                    <div key={relatedTopic.slug} className="group">
-                      <Link
-                        href={`/apex/${relatedTopic.slug}`}
-                        className="block"
-                      >
-                        <h4 className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-1">
-                          {relatedTopic.frontmatter.title}
-                        </h4>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
-                          {relatedTopic.frontmatter.description}
-                        </p>
-                        <div className="flex items-center mt-2 text-xs text-gray-500 dark:text-gray-400">
-                          <Clock className="h-3 w-3 mr-1" />
-                          {relatedTopic.readingTime.text}
-                        </div>
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* All Topics Navigation */}
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 All Apex Topics
               </h3>
               <div className="space-y-2 max-h-96 overflow-y-auto">
-                {allTopics.map((topicItem, index) => (
+                {allTopicSlugs.map((slug, index) => (
                   <Link
-                    key={topicItem.slug}
-                    href={`/apex/${topicItem.slug}`}
+                    key={slug}
+                    href={`/apex/${slug}`}
                     className={cn(
                       'block px-3 py-2 rounded-md text-sm transition-colors',
-                      topicItem.slug === params.slug
+                      slug === params.slug
                         ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-100 font-medium'
                         : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
                     )}
                   >
                     <div className="flex items-center">
                       <span className="text-xs text-gray-400 mr-2">{index + 1}.</span>
-                      {topicItem.frontmatter.title}
+                      {topicContent[slug].title}
                     </div>
                   </Link>
                 ))}
