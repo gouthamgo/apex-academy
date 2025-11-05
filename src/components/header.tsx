@@ -9,11 +9,11 @@ import { cn } from '@/lib/utils';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Learn Apex', href: '/learn' },
-  { name: 'LWC Fundamentals', href: '#', disabled: true },
-  { name: 'Integration Patterns', href: '#', disabled: true },
-  { name: 'Testing Strategies', href: '#', disabled: true },
-  { name: 'Tutorials', href: '#', disabled: true },
+  { name: 'Apex', href: '/apex' },
+  { name: 'LWC', href: '/lwc' },
+  { name: 'Integration', href: '/integration' },
+  { name: 'Testing', href: '/testing' },
+  { name: 'Tutorials', href: '/tutorials' },
 ];
 
 export function Header() {
@@ -39,30 +39,18 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              item.disabled ? (
-                <div
-                  key={item.name}
-                  className="text-sm font-medium text-gray-400 dark:text-gray-600 cursor-not-allowed relative group"
-                >
-                  {item.name}
-                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                    Coming Soon
-                  </span>
-                </div>
-              ) : (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    'text-sm font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400',
-                    pathname === item.href
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-gray-700 dark:text-gray-300'
-                  )}
-                >
-                  {item.name}
-                </Link>
-              )
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  'text-sm font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400',
+                  pathname === item.href
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-gray-700 dark:text-gray-300'
+                )}
+              >
+                {item.name}
+              </Link>
             ))}
           </nav>
 
@@ -98,28 +86,19 @@ export function Header() {
           <div className="md:hidden border-t border-gray-200 dark:border-gray-700 py-4">
             <nav className="space-y-4">
               {navigation.map((item) => (
-                item.disabled ? (
-                  <div
-                    key={item.name}
-                    className="block text-base font-medium text-gray-400 dark:text-gray-600 cursor-not-allowed"
-                  >
-                    {item.name} <span className="text-xs">(Coming Soon)</span>
-                  </div>
-                ) : (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={cn(
-                      'block text-base font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400',
-                      pathname === item.href
-                        ? 'text-blue-600 dark:text-blue-400'
-                        : 'text-gray-700 dark:text-gray-300'
-                    )}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                )
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    'block text-base font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400',
+                    pathname === item.href
+                      ? 'text-blue-600 dark:text-blue-400'
+                      : 'text-gray-700 dark:text-gray-300'
+                  )}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
               ))}
             </nav>
           </div>
