@@ -60,7 +60,7 @@ export function CodeBlock({
       <div className="relative">
         <button
           onClick={copyToClipboard}
-          className="absolute top-3 right-3 p-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity z-10"
+          className="absolute top-3 right-3 p-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md opacity-90 hover:opacity-100 transition-all shadow-md z-10"
           title="Copy code"
         >
           {copied ? <Check size={16} /> : <Copy size={16} />}

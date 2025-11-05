@@ -87,7 +87,7 @@ export function AnnotatedCode({ code, annotations, language = 'apex' }: Annotate
         {/* Copy Button */}
         <button
           onClick={handleCopy}
-          className="absolute top-2 right-2 p-2 rounded-md bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white transition-colors opacity-0 group-hover:opacity-100"
+          className="absolute top-2 right-2 p-2 rounded-md bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white transition-all opacity-90 hover:opacity-100 shadow-md"
           title="Copy code"
         >
           {copied ? (
