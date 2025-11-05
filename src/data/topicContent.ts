@@ -2763,7 +2763,7 @@ inventory.updateInventory('WIDGET-001', 0);   // Out of stock alert`,
       },
       {
         number: 20,
-        difficulty: 'expert',
+        difficulty: 'advanced',
         question: "Design a comprehensive class hierarchy for a Salesforce integration that handles multiple data sources with different authentication and processing requirements.",
         answer: "Use abstract base class with template method pattern, interfaces for contracts, and strategy pattern for authentication",
         explanation: "Complex integration scenarios require flexible architecture using multiple design patterns. Abstract classes provide common structure while interfaces ensure contracts are met.",
