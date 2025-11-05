@@ -7,6 +7,7 @@ import { markdownToHtml } from '@/lib/markdown';
 import { TableOfContents } from '@/components/table-of-contents';
 import { TutorialCard } from '@/components/tutorial-card';
 import { CodeBlock } from '@/components/code-block';
+import { CodeCopyHandler } from '@/components/code-copy-handler';
 import { formatDate, cn } from '@/lib/utils';
 
 interface TutorialPageProps {
@@ -85,6 +86,7 @@ export default async function TutorialPage({ params }: TutorialPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <CodeCopyHandler />
       {/* Breadcrumb */}
       <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">

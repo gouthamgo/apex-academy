@@ -1,5 +1,6 @@
 import { marked } from 'marked';
 import { generateTableOfContents } from './utils';
+import { highlightCode } from './syntax-highlighter';
 
 // Configure marked with custom renderer
 const renderer = new marked.Renderer();
@@ -33,13 +34,27 @@ renderer.heading = function (text, level) {
   </h${level}>`;
 };
 
-// Custom code renderer that adds language-specific classes
+// Custom code renderer with syntax highlighting
 renderer.code = function (code, language) {
   const validLanguage = language && language.match(/^[a-zA-Z0-9_+-]*$/);
-  const lang = validLanguage ? language : '';
+  const lang = validLanguage ? language : 'text';
 
-  return `<div class="code-block-wrapper" data-language="${lang}">
-    <pre class="language-${lang}"><code class="language-${lang}">${code}</code></pre>
+  // Apply syntax highlighting
+  const highlightedCode = highlightCode(code, lang);
+
+  return `<div class="code-block-wrapper relative group my-6" data-language="${lang}">
+    <div class="absolute top-3 right-3 z-10">
+      <button class="copy-code-btn bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm font-medium transition-all shadow-md opacity-90 hover:opacity-100 flex items-center gap-2" data-code="${code.replace(/"/g, '&quot;').replace(/\n/g, '\\n')}">
+        <svg class="copy-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+        </svg>
+        <span class="copy-text">Copy</span>
+        <svg class="check-icon w-4 h-4 hidden text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+      </button>
+    </div>
+    <pre class="bg-[#1e1e1e] dark:bg-[#0d1117] rounded-lg p-6 overflow-x-auto border border-gray-700 dark:border-gray-800 shadow-lg"><code class="language-${lang} text-sm leading-relaxed font-mono">${highlightedCode}</code></pre>
   </div>`;
 };
 

@@ -5,6 +5,7 @@ import { ArrowLeft, Clock, ArrowRight, BookOpen, Target } from 'lucide-react';
 import { getTopicBySlug, getTopicsBySection, getRelatedTopics } from '@/lib/topics';
 import { markdownToHtml } from '@/lib/markdown';
 import { TableOfContents } from '@/components/table-of-contents';
+import { CodeCopyHandler } from '@/components/code-copy-handler';
 import { cn } from '@/lib/utils';
 
 interface TopicPageProps {
@@ -62,6 +63,7 @@ export default async function LWCTopicPage({ params }: TopicPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <CodeCopyHandler />
       {/* Breadcrumb */}
       <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
