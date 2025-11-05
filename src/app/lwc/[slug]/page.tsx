@@ -13,9 +13,9 @@ interface TopicPageProps {
   };
 }
 
-// Generate static params for all Apex topics
+// Generate static params for all LWC topics
 export async function generateStaticParams() {
-  const topics = getTopicsBySection('apex');
+  const topics = getTopicsBySection('lwc');
 
   return topics.map((topic) => ({
     slug: topic.slug,
@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: TopicPageProps): Promise<Metadata> {
-  const topic = getTopicBySlug(params.slug, 'apex');
+  const topic = getTopicBySlug(params.slug, 'lwc');
 
   if (!topic) {
     return {
@@ -33,20 +33,20 @@ export async function generateMetadata({ params }: TopicPageProps): Promise<Meta
   }
 
   return {
-    title: `${topic.frontmatter.title} - Apex Fundamentals`,
+    title: `${topic.frontmatter.title} - LWC Fundamentals`,
     description: topic.frontmatter.description,
     keywords: topic.frontmatter.concepts.join(', '),
   };
 }
 
-export default async function ApexTopicPage({ params }: TopicPageProps) {
-  const topic = getTopicBySlug(params.slug, 'apex');
+export default async function LWCTopicPage({ params }: TopicPageProps) {
+  const topic = getTopicBySlug(params.slug, 'lwc');
 
   if (!topic) {
     notFound();
   }
 
-  const allTopics = getTopicsBySection('apex');
+  const allTopics = getTopicsBySection('lwc');
   const currentIndex = allTopics.findIndex(t => t.slug === params.slug);
   const previousTopic = currentIndex > 0 ? allTopics[currentIndex - 1] : null;
   const nextTopic = currentIndex < allTopics.length - 1 ? allTopics[currentIndex + 1] : null;
@@ -74,10 +74,10 @@ export default async function ApexTopicPage({ params }: TopicPageProps) {
             </Link>
             <span className="text-gray-400 dark:text-gray-600">/</span>
             <Link
-              href="/apex"
+              href="/lwc"
               className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
             >
-              Apex Fundamentals
+              LWC Fundamentals
             </Link>
             <span className="text-gray-400 dark:text-gray-600">/</span>
             <span className="text-gray-900 dark:text-gray-100 font-medium">
@@ -129,12 +129,12 @@ export default async function ApexTopicPage({ params }: TopicPageProps) {
               {/* Prerequisites */}
               {topic.frontmatter.prerequisites.length > 0 && (
                 <div className="px-8 pb-6 pt-4">
-                  <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-                    <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2 flex items-center">
+                  <div className="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
+                    <h3 className="text-sm font-semibold text-purple-900 dark:text-purple-100 mb-2 flex items-center">
                       <BookOpen className="h-4 w-4 mr-2" />
                       Prerequisites
                     </h3>
-                    <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1">
+                    <ul className="text-sm text-purple-800 dark:text-purple-200 space-y-1">
                       {topic.frontmatter.prerequisites.map((prerequisite, index) => (
                         <li key={index}>• {prerequisite}</li>
                       ))}
@@ -173,14 +173,14 @@ export default async function ApexTopicPage({ params }: TopicPageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {previousTopic ? (
                 <Link
-                  href={`/apex/${previousTopic.slug}`}
+                  href={`/lwc/${previousTopic.slug}`}
                   className="group p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-all"
                 >
                   <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
                     <ArrowLeft className="h-4 w-4 mr-1 group-hover:-translate-x-1 transition-transform" />
                     Previous Topic
                   </div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                     {previousTopic.frontmatter.title}
                   </h4>
                 </Link>
@@ -193,14 +193,14 @@ export default async function ApexTopicPage({ params }: TopicPageProps) {
 
               {nextTopic ? (
                 <Link
-                  href={`/apex/${nextTopic.slug}`}
+                  href={`/lwc/${nextTopic.slug}`}
                   className="group p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-all text-right"
                 >
                   <div className="flex items-center justify-end text-sm text-gray-500 dark:text-gray-400 mb-2">
                     Next Topic
                     <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                     {nextTopic.frontmatter.title}
                   </h4>
                 </Link>
@@ -255,7 +255,7 @@ export default async function ApexTopicPage({ params }: TopicPageProps) {
                       href={`/${relatedTopic.frontmatter.section}/${relatedTopic.slug}`}
                       className="block group"
                     >
-                      <h4 className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-1">
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mb-1">
                         {relatedTopic.frontmatter.title}
                       </h4>
                       <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
@@ -270,17 +270,17 @@ export default async function ApexTopicPage({ params }: TopicPageProps) {
             {/* All Topics Navigation */}
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                All Apex Topics
+                All LWC Topics
               </h3>
               <div className="space-y-2 max-h-96 overflow-y-auto">
                 {allTopics.map((t, index) => (
                   <Link
                     key={t.slug}
-                    href={`/apex/${t.slug}`}
+                    href={`/lwc/${t.slug}`}
                     className={cn(
                       'block px-3 py-2 rounded-md text-sm transition-colors',
                       t.slug === params.slug
-                        ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-100 font-medium'
+                        ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-900 dark:text-purple-100 font-medium'
                         : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
                     )}
                   >

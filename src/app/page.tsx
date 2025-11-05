@@ -31,15 +31,19 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/learn"
+                href="/apex"
                 className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 transition-colors"
               >
                 Start Learning Apex
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <div className="inline-flex items-center justify-center px-8 py-3 border-2 border-white/50 text-base font-medium rounded-md text-white/70 cursor-not-allowed">
-                Explore LWC (Coming Soon)
-              </div>
+              <Link
+                href="/lwc"
+                className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-md text-white hover:bg-white/10 transition-colors"
+              >
+                Explore LWC
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </div>
           </div>
         </div>
@@ -96,46 +100,25 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {sections.map((section) => (
-              section.id === 'apex' ? (
-                <Link
-                  key={section.id}
-                  href="/learn"
-                  className="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="text-center">
-                    <div className="text-4xl mb-4">{section.icon}</div>
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {section.name}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
-                      {section.description}
-                    </p>
-                    <div className="flex items-center justify-center text-sm text-gray-500 dark:text-gray-400">
-                      <BookOpen className="h-4 w-4 mr-1" />
-                      {section.topics} topics
-                    </div>
-                  </div>
-                </Link>
-              ) : (
-                <div
-                  key={section.id}
-                  className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 opacity-60 cursor-not-allowed"
-                >
-                  <div className="text-center">
-                    <div className="text-4xl mb-4 grayscale">{section.icon}</div>
-                    <h3 className="text-xl font-semibold text-gray-500 dark:text-gray-400 mb-3">
-                      {section.name}
-                    </h3>
-                    <p className="text-gray-500 dark:text-gray-500 mb-4">
-                      {section.description}
-                    </p>
-                    <div className="flex items-center justify-center text-sm text-gray-400 dark:text-gray-500">
-                      <BookOpen className="h-4 w-4 mr-1" />
-                      Coming Soon
-                    </div>
+              <Link
+                key={section.id}
+                href={`/${section.id}`}
+                className="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
+              >
+                <div className="text-center">
+                  <div className="text-4xl mb-4">{section.icon}</div>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {section.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    {section.description}
+                  </p>
+                  <div className="flex items-center justify-center text-sm text-gray-500 dark:text-gray-400">
+                    <BookOpen className="h-4 w-4 mr-1" />
+                    {section.topics} topics
                   </div>
                 </div>
-              )
+              </Link>
             ))}
           </div>
         </div>
@@ -296,7 +279,7 @@ export default function HomePage() {
             Join thousands of developers who have advanced their careers with our comprehensive tutorials.
           </p>
           <Link
-            href="/learn"
+            href="/apex"
             className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 transition-colors"
           >
             Start Learning Today
