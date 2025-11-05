@@ -2,17 +2,17 @@ import Link from 'next/link';
 import { BookOpen, Github, Twitter, Linkedin } from 'lucide-react';
 
 const footerNavigation = {
-  tutorials: [
-    { name: 'Apex Fundamentals', href: '/tutorials/apex' },
-    { name: 'Lightning Web Components', href: '/tutorials/lwc' },
-    { name: 'Integration Patterns', href: '/tutorials/integration' },
-    { name: 'Testing Strategies', href: '/tutorials/testing' },
+  sections: [
+    { name: 'Apex Fundamentals', href: '/apex' },
+    { name: 'Lightning Web Components', href: '/lwc' },
+    { name: 'Integration Patterns', href: '/integration' },
+    { name: 'Testing Strategies', href: '/testing' },
   ],
   resources: [
-    { name: 'Getting Started', href: '/getting-started' },
-    { name: 'Best Practices', href: '/best-practices' },
-    { name: 'Common Patterns', href: '/patterns' },
-    { name: 'Certification Guide', href: '/certification' },
+    { name: 'All Tutorials', href: '/tutorials' },
+    { name: 'Apex Topics', href: '/apex' },
+    { name: 'LWC Topics', href: '/lwc' },
+    { name: 'Integration Topics', href: '/integration' },
   ],
   community: [
     { name: 'Trailblazer Community', href: 'https://trailhead.salesforce.com/community' },
@@ -68,13 +68,13 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Tutorials */}
+          {/* Sections */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-              Tutorials
+              Learn
             </h3>
             <ul className="space-y-3">
-              {footerNavigation.tutorials.map((item) => (
+              {footerNavigation.sections.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
