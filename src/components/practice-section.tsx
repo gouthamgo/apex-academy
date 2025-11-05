@@ -143,7 +143,7 @@ export function PracticeSection({ topicName, questions }: PracticeSectionProps) 
         </div>
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-6">
         {questions.map((question) => (
           <QuestionCard key={question.number} question={question} />
         ))}

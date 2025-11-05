@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -56,11 +56,19 @@
     @apply border-gray-200 dark:border-gray-700;
   }
   body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'wght' 400;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-feature-settings: 'liga' 1, 'calt' 1;
   }
 }
 
-/* Custom scrollbar styles */
+/* Enhanced scrollbar styles */
 .scrollbar-thin {
   scrollbar-width: thin;
 }
@@ -69,37 +77,36 @@
   scrollbar-color: #4b5563 #1f2937;
 }
 
-.scrollbar-track-gray-800 {
-  /* No change needed for webkit scrollbars in this context */
-}
-
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  @apply bg-gray-100 dark:bg-gray-800 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400 dark:bg-gray-500;
 }
 
-/* Prism.js theme overrides */
+/* Modern syntax highlighting with VS Code Dark+ theme */
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  @apply text-gray-500 dark:text-gray-400;
+  color: #6a9955;
+  font-style: italic;
 }
 
 .token.punctuation {
-  @apply text-gray-400 dark:text-gray-300;
+  color: #d4d4d4;
 }
 
 .token.property,
@@ -109,7 +116,7 @@
 .token.constant,
 .token.symbol,
 .token.deleted {
-  @apply text-red-400 dark:text-red-300;
+  color: #b5cea8;
 }
 
 .token.selector,
@@ -118,7 +125,7 @@
 .token.char,
 .token.builtin,
 .token.inserted {
-  @apply text-green-400 dark:text-green-300;
+  color: #ce9178;
 }
 
 .token.operator,
@@ -126,31 +133,41 @@
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  @apply text-yellow-400 dark:text-yellow-300;
+  color: #d4d4d4;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  @apply text-blue-400 dark:text-blue-300;
+  color: #c586c0;
 }
 
 .token.function,
 .token.class-name {
-  @apply text-purple-400 dark:text-purple-300;
+  color: #dcdcaa;
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  @apply text-orange-400 dark:text-orange-300;
+  color: #d16969;
 }
 
 .token.annotation {
-  @apply text-purple-400 dark:text-purple-300 font-medium;
+  color: #4ec9b0;
+  font-weight: 500;
 }
 
-/* Custom table of contents styles */
+.token.namespace {
+  opacity: 0.8;
+}
+
+/* Code block background */
+.bg-code-bg {
+  background-color: #1e1e1e !important;
+}
+
+/* Table of contents enhanced styles */
 .toc-item {
   @apply transition-all duration-200;
 }
@@ -168,9 +185,9 @@
   transition: width 0.3s ease-out;
 }
 
-/* Animation for tutorial cards */
+/* Animation for cards */
 .tutorial-card {
-  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
 }
 
 /* Focus styles for accessibility */
@@ -178,67 +195,101 @@
   @apply ring-2 ring-blue-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
 }
 
-/* Topic Page Content Styling */
+/* Prose (Markdown content) styling */
+.prose {
+  @apply max-w-none text-gray-800 dark:text-gray-200;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
 .prose h1 {
-  @apply text-3xl font-bold text-gray-900 dark:text-white mb-6 mt-8 pb-3 border-b-2 border-blue-200 dark:border-blue-800;
+  @apply text-4xl font-bold text-gray-900 dark:text-white mb-6 mt-10 pb-4 border-b-2 border-blue-200 dark:border-blue-800;
+  letter-spacing: -0.025em;
 }
 
 .prose h1:first-child {
   @apply mt-0;
 }
 
-/* Section separators */
-.prose hr {
-  @apply my-12 border-t-2 border-gray-200 dark:border-gray-700;
+.prose h2 {
+  @apply text-3xl font-bold text-gray-900 dark:text-white mb-5 mt-10;
+  letter-spacing: -0.02em;
 }
 
-/* Section-specific styling */
+.prose h3 {
+  @apply text-2xl font-semibold text-gray-900 dark:text-white mb-4 mt-8;
+}
+
+.prose h4 {
+  @apply text-xl font-semibold text-gray-900 dark:text-white mb-3 mt-6;
+}
+
+.prose p {
+  @apply mb-6 leading-relaxed;
+}
+
+/* Section separators */
+.prose hr {
+  @apply my-12 border-t-2 border-gray-300 dark:border-gray-700;
+}
+
+/* Section-specific styling with modern gradients */
 .prose h1.section-concepts {
-  @apply text-green-600 dark:text-green-400 border-green-200 dark:border-green-800;
+  @apply bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent border-green-300 dark:border-green-800;
 }
 
 .prose h1.section-code {
-  @apply text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800;
+  @apply bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent border-blue-300 dark:border-blue-800;
 }
 
 .prose h1.section-gotchas {
-  @apply text-red-600 dark:text-red-400 border-red-200 dark:border-red-800;
+  @apply bg-gradient-to-r from-red-600 to-orange-600 dark:from-red-400 dark:to-orange-400 bg-clip-text text-transparent border-red-300 dark:border-red-800;
 }
 
 .prose h1.section-exam {
-  @apply text-yellow-600 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800;
+  @apply bg-gradient-to-r from-yellow-600 to-amber-600 dark:from-yellow-400 dark:to-amber-400 bg-clip-text text-transparent border-yellow-300 dark:border-yellow-800;
 }
 
 .prose h1.section-practice {
-  @apply text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-800;
+  @apply bg-gradient-to-r from-purple-600 to-fuchsia-600 dark:from-purple-400 dark:to-fuchsia-400 bg-clip-text text-transparent border-purple-300 dark:border-purple-800;
 }
 
 .prose h1.section-conversion {
-  @apply text-orange-600 dark:text-orange-400 border-orange-200 dark:border-orange-800;
+  @apply bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent border-orange-300 dark:border-orange-800;
 }
 
 .prose h1.section-constants {
-  @apply text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800;
+  @apply bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent border-indigo-300 dark:border-indigo-800;
 }
 
 .prose h1.section-related {
-  @apply text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-600;
+  @apply text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600;
 }
 
-/* Code block improvements */
+/* Enhanced code block styling */
 .prose pre {
-  @apply bg-gray-900 dark:bg-gray-950 text-gray-100 p-6 rounded-lg my-6 overflow-x-auto border border-gray-700 dark:border-gray-600;
+  @apply bg-[#1e1e1e] dark:bg-[#0d1117] text-gray-100 p-6 rounded-xl my-8 overflow-x-auto border border-gray-700 dark:border-gray-800 shadow-lg;
+  font-size: 0.9375rem;
+  line-height: 1.6;
 }
 
 .prose code {
-  @apply text-sm font-mono;
+  @apply font-mono text-[0.9em];
+  font-feature-settings: 'liga' 1, 'calt' 1;
 }
 
-.prose p code {
-  @apply bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1 py-0.5 rounded text-sm;
+.prose p code,
+.prose li code {
+  @apply bg-gray-100 dark:bg-gray-800 text-pink-600 dark:text-pink-400 px-1.5 py-0.5 rounded text-sm font-semibold;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Fix react-syntax-highlighter white backgrounds */
+.dark .prose p code,
+.dark .prose li code {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Fix syntax highlighter backgrounds */
 .react-syntax-highlighter-line-number,
 .prism-code .token-line,
 .token-line,
@@ -252,49 +303,101 @@ pre[class*="language-"] .token-line,
   background-color: transparent !important;
 }
 
-/* Ensure syntax highlighter container has dark background */
 .react-syntax-highlighter,
 code[class*="language-"],
 pre[class*="language-"] {
-  background: #0f0f0f !important;
-  background-color: #0f0f0f !important;
+  background: #1e1e1e !important;
+  background-color: #1e1e1e !important;
 }
 
-/* Remove any white backgrounds from syntax highlighting tokens */
+.dark .react-syntax-highlighter,
+.dark code[class*="language-"],
+.dark pre[class*="language-"] {
+  background: #0d1117 !important;
+  background-color: #0d1117 !important;
+}
+
 .token {
   background: transparent !important;
   background-color: transparent !important;
 }
 
-/* Enhance blockquotes and callouts */
+/* Enhanced blockquotes */
 .prose blockquote {
-  @apply border-l-4 border-gray-300 dark:border-gray-600 pl-6 py-4 my-6 bg-gray-50 dark:bg-gray-800/50 rounded-r-lg;
+  @apply border-l-4 border-blue-400 dark:border-blue-600 pl-6 py-4 my-8 bg-blue-50 dark:bg-blue-900/20 rounded-r-lg italic;
+  quotes: """ """ "'" "'";
+}
+
+.prose blockquote p {
+  @apply text-gray-700 dark:text-gray-300;
 }
 
 /* List styling improvements */
 .prose ul {
-  @apply space-y-2;
+  @apply space-y-3 my-6;
+}
+
+.prose ol {
+  @apply space-y-3 my-6;
 }
 
 .prose ul li {
-  @apply relative pl-6;
+  @apply relative pl-7;
 }
 
 .prose ul li::before {
-  @apply content-['•'] absolute left-0 text-blue-500 dark:text-blue-400 font-bold;
+  @apply content-[''] absolute left-0 top-[0.625em] w-1.5 h-1.5 bg-blue-500 dark:bg-blue-400 rounded-full;
 }
 
-/* Strong text highlighting */
+.prose ol {
+  counter-reset: list-counter;
+}
+
+.prose ol li {
+  @apply relative pl-8;
+  counter-increment: list-counter;
+}
+
+.prose ol li::before {
+  @apply content-[counter(list-counter)] absolute left-0 top-0 font-semibold text-blue-600 dark:text-blue-400;
+}
+
+.prose li {
+  @apply text-gray-700 dark:text-gray-300 leading-relaxed;
+}
+
+/* Strong text with better contrast */
 .prose strong {
   @apply text-gray-900 dark:text-white font-semibold;
 }
 
-/* Link styling */
+/* Link styling with hover effects */
 .prose a {
-  @apply text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors;
+  @apply text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-2 underline-offset-2 transition-colors font-medium;
 }
 
-/* Practice question dropdown styles */
+/* Table styling */
+.prose table {
+  @apply w-full my-8 border-collapse;
+}
+
+.prose thead {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+.prose th {
+  @apply px-4 py-3 text-left font-semibold text-gray-900 dark:text-white border-b-2 border-gray-300 dark:border-gray-600;
+}
+
+.prose td {
+  @apply px-4 py-3 border-b border-gray-200 dark:border-gray-700;
+}
+
+.prose tbody tr:hover {
+  @apply bg-gray-50 dark:bg-gray-800/50;
+}
+
+/* Practice question styles */
 .question-dropdown[open] .dropdown-arrow {
   transform: rotate(180deg);
 }
@@ -327,6 +430,15 @@ pre[class*="language-"] {
   transition: all 0.3s ease;
 }
 
+/* Enhanced shadows for depth */
+.shadow-custom {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dark .shadow-custom {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
 /* Print styles */
 @media print {
   .no-print {
@@ -340,4 +452,23 @@ pre[class*="language-"] {
   .print-break-after {
     break-after: page;
   }
+}
+
+/* Smooth transitions */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Image styling */
+.prose img {
+  @apply rounded-lg shadow-lg my-8;
+}
+
+/* Better selection colors */
+::selection {
+  @apply bg-blue-200 dark:bg-blue-900 text-gray-900 dark:text-white;
+}
+
+::-moz-selection {
+  @apply bg-blue-200 dark:bg-blue-900 text-gray-900 dark:text-white;
 }

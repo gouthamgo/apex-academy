@@ -90,7 +90,7 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
         </button>
 
         {isExpanded && (
-          <nav className="p-2 max-h-96 overflow-y-auto">
+          <nav className="p-2">
             {items.map((item) => {
               const IconComponent = getSectionIcon(item.title);
               const isActive = activeId === item.id;
