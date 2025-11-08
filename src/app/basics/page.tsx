@@ -68,11 +68,11 @@ export default function SalesforceBasicsPage() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            Complete Apex Curriculum
+            Complete Salesforce Basics Curriculum
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Master Apex programming from fundamentals to advanced patterns. Each topic builds on previous concepts
-            with comprehensive examples, real-world scenarios, and certification exam focus points.
+            Start your Salesforce journey with fundamentals. Learn platform basics, data model, security, automation, and more.
+            Each topic builds on previous concepts with comprehensive examples and real-world scenarios.
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export default function SalesforceBasicsPage() {
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        <Link href={`/apex/${topic.slug}`}>
+                        <Link href={`/basics/${topic.slug}`}>
                           {topic.frontmatter.title}
                         </Link>
                       </h3>
@@ -158,7 +158,7 @@ export default function SalesforceBasicsPage() {
                   </div>
 
                   <Link
-                    href={`/apex/${topic.slug}`}
+                    href={`/basics/${topic.slug}`}
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors group"
                   >
                     Start Topic
@@ -186,32 +186,32 @@ export default function SalesforceBasicsPage() {
               Structured Learning Path
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-              This curriculum is designed to take you from Apex beginner to expert. Topics are ordered by complexity
+              This curriculum is designed to take you from complete beginner to Salesforce-ready. Topics are ordered by complexity
               and build upon each other. Follow the sequence for optimal learning outcomes.
             </p>
 
             <div className="grid md:grid-cols-3 gap-6 text-left">
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <div className="text-green-600 dark:text-green-400 text-2xl mb-2">🌱</div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Foundation</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Platform Basics</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Variables, data types, collections, and control flow - the building blocks of Apex programming.
+                  Understand Salesforce platform, data model, objects, fields, and relationships - the foundation.
                 </p>
               </div>
 
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <div className="text-blue-600 dark:text-blue-400 text-2xl mb-2">🏗️</div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Core Skills</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Configuration</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  OOP concepts, database operations, exception handling, and trigger development patterns.
+                  Security model, automation with flows, reports and dashboards for data insights.
                 </p>
               </div>
 
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <div className="text-purple-600 dark:text-purple-400 text-2xl mb-2">🚀</div>
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Advanced</h4>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Customization</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Asynchronous processing, Flow integration, testing strategies, and performance optimization.
+                  UI customization, Lightning App Builder, and preparing for development with Apex and LWC.
                 </p>
               </div>
             </div>

@@ -353,10 +353,12 @@ pre[class*="language-"] {
 /* List styling improvements */
 .prose ul {
   @apply space-y-3 my-6;
+  list-style-type: none;
 }
 
 .prose ol {
   @apply space-y-3 my-6;
+  list-style-type: none;
 }
 
 .prose ul li {
@@ -382,6 +384,20 @@ pre[class*="language-"] {
 
 .prose li {
   @apply text-gray-700 dark:text-gray-300 leading-relaxed;
+}
+
+/* Nested list spacing */
+.prose li > ul,
+.prose li > ol {
+  @apply mt-3 mb-0;
+}
+
+/* Ensure nested lists also have no default markers */
+.prose ul ul,
+.prose ul ol,
+.prose ol ul,
+.prose ol ol {
+  list-style-type: none;
 }
 
 /* Strong text with better contrast */
