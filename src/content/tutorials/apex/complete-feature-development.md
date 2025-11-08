@@ -8,6 +8,7 @@ overview: "Learn end-to-end Salesforce development by building a real-world feat
 tags: ["end-to-end", "apex", "lwc", "triggers", "integration", "testing", "real-world"]
 author: "Apex Academy Team"
 lastUpdated: "2025-01-15"
+featured: true
 prerequisites: ["variables-and-data-types", "triggers-and-frameworks", "component-fundamentals", "wire-service-and-apex"]
 ---
 
