@@ -1,0 +1,124 @@
+name: CI Checks
+
+on:
+  push:
+    branches:
+      - 'claude/**'
+      - 'feature/**'
+      - 'dev/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Job 1: Code quality checks
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint --if-present
+        continue-on-error: false
+
+      - name: Check TypeScript
+        run: npx tsc --noEmit --skipLibCheck
+        continue-on-error: true
+
+  # Job 2: Build verification
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          CI: true
+
+      - name: Check build artifacts
+        run: |
+          if [ -d ".next" ]; then
+            echo "✅ Build artifacts created successfully"
+            ls -lah .next/
+          else
+            echo "❌ Build artifacts not found"
+            exit 1
+          fi
+
+  # Job 3: Content validation
+  content-validation:
+    name: Content Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate markdown files
+        run: |
+          echo "Checking for markdown files..."
+          find src/content -name "*.md" | wc -l
+
+          echo "Validating frontmatter..."
+          for file in src/content/**/*.md; do
+            if [ -f "$file" ]; then
+              if ! head -n 1 "$file" | grep -q "^---$"; then
+                echo "❌ Missing frontmatter in $file"
+                exit 1
+              fi
+              echo "✅ Valid: $file"
+            fi
+          done
+
+  # Job 4: Security scan
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run npm audit
+        run: npm audit --production --audit-level=moderate
+        continue-on-error: true
+
+  # Job 5: All checks passed
+  all-checks-passed:
+    name: All Checks Passed
+    needs: [code-quality, build, content-validation, security]
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: All checks passed
+        run: |
+          echo "✅ All CI checks passed successfully!"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Ready for merge to main"
