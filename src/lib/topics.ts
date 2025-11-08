@@ -7,7 +7,7 @@ import { calculateReadingTime } from './utils';
 const topicsDirectory = path.join(process.cwd(), 'src/content/topics');
 
 export function getAllTopics(): Topic[] {
-  const sections = ['apex', 'lwc', 'integration', 'testing'];
+  const sections = ['basics', 'apex', 'lwc', 'integration', 'testing'];
   const topics: Topic[] = [];
 
   sections.forEach((section) => {
@@ -32,7 +32,7 @@ export function getAllTopics(): Topic[] {
 
   // Sort by section and order
   return topics.sort((a, b) => {
-    const sectionOrder = ['apex', 'lwc', 'integration', 'testing'];
+    const sectionOrder = ['basics', 'apex', 'lwc', 'integration', 'testing'];
     const sectionComparison = sectionOrder.indexOf(a.frontmatter.section) - sectionOrder.indexOf(b.frontmatter.section);
 
     if (sectionComparison !== 0) {
@@ -44,7 +44,7 @@ export function getAllTopics(): Topic[] {
 }
 
 export function getTopicBySlug(slug: string, section?: string): Topic | null {
-  const sections = section ? [section] : ['apex', 'lwc', 'integration', 'testing'];
+  const sections = section ? [section] : ['basics', 'apex', 'lwc', 'integration', 'testing'];
 
   for (const sect of sections) {
     const fullPath = path.join(topicsDirectory, sect, `${slug}.md`);
@@ -80,8 +80,16 @@ export function getTopicsBySection(section: string): Topic[] {
 export function getSectionData() {
   return [
     {
+      id: 'basics',
+      name: 'Salesforce Basics',
+      description: 'Start here! Learn Salesforce fundamentals, data model, and platform basics before coding',
+      icon: '🎯',
+      color: 'green',
+      topics: getTopicsBySection('basics').length,
+    },
+    {
       id: 'apex',
-      name: 'Apex Fundamentals',
+      name: 'Apex Programming',
       description: 'Master Salesforce\'s powerful programming language from variables to advanced patterns',
       icon: '⚡',
       color: 'blue',
@@ -89,15 +97,15 @@ export function getSectionData() {
     },
     {
       id: 'lwc',
-      name: 'LWC Fundamentals',
-      description: 'Build modern Lightning Web Components with comprehensive component patterns',
+      name: 'Lightning Web Components',
+      description: 'Build modern UI with Lightning Web Components - JavaScript framework for Salesforce',
       icon: '⚛️',
       color: 'purple',
       topics: getTopicsBySection('lwc').length,
     },
     {
       id: 'integration',
-      name: 'Integration Patterns',
+      name: 'Integration & APIs',
       description: 'Connect Salesforce with external systems using REST, SOAP, and platform events',
       icon: '🔗',
       color: 'orange',
@@ -105,10 +113,10 @@ export function getSectionData() {
     },
     {
       id: 'testing',
-      name: 'Testing Strategies',
+      name: 'Testing & Quality',
       description: 'Write comprehensive tests for bulletproof Salesforce applications',
       icon: '🧪',
-      color: 'green',
+      color: 'teal',
       topics: getTopicsBySection('testing').length,
     },
   ];

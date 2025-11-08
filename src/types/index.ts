@@ -1,7 +1,7 @@
 // Topic-based curriculum types
 export interface TopicFrontmatter {
   title: string;
-  section: 'apex' | 'lwc' | 'integration' | 'testing';
+  section: 'basics' | 'apex' | 'lwc' | 'integration' | 'testing';
   order: number; // Order within section
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   readTime: string;
