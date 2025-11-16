@@ -14,6 +14,7 @@ const navigation = [
   { name: 'LWC', href: '/lwc' },
   { name: 'Integration', href: '/integration' },
   { name: 'Testing', href: '/testing' },
+  { name: 'Interviews', href: '/interview' },
   { name: 'Tutorials', href: '/tutorials' },
 ];
 

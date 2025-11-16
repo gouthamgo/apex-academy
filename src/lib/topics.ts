@@ -7,7 +7,7 @@ import { calculateReadingTime } from './utils';
 const topicsDirectory = path.join(process.cwd(), 'src/content/topics');
 
 export function getAllTopics(): Topic[] {
-  const sections = ['basics', 'apex', 'lwc', 'integration', 'testing'];
+  const sections = ['basics', 'apex', 'lwc', 'integration', 'testing', 'interview'];
   const topics: Topic[] = [];
 
   sections.forEach((section) => {
@@ -32,7 +32,7 @@ export function getAllTopics(): Topic[] {
 
   // Sort by section and order
   return topics.sort((a, b) => {
-    const sectionOrder = ['basics', 'apex', 'lwc', 'integration', 'testing'];
+    const sectionOrder = ['basics', 'apex', 'lwc', 'integration', 'testing', 'interview'];
     const sectionComparison = sectionOrder.indexOf(a.frontmatter.section) - sectionOrder.indexOf(b.frontmatter.section);
 
     if (sectionComparison !== 0) {
@@ -44,7 +44,7 @@ export function getAllTopics(): Topic[] {
 }
 
 export function getTopicBySlug(slug: string, section?: string): Topic | null {
-  const sections = section ? [section] : ['basics', 'apex', 'lwc', 'integration', 'testing'];
+  const sections = section ? [section] : ['basics', 'apex', 'lwc', 'integration', 'testing', 'interview'];
 
   for (const sect of sections) {
     const fullPath = path.join(topicsDirectory, sect, `${slug}.md`);
@@ -118,6 +118,14 @@ export function getSectionData() {
       icon: '🧪',
       color: 'teal',
       topics: getTopicsBySection('testing').length,
+    },
+    {
+      id: 'interview',
+      name: 'Interview Prep',
+      description: 'Ace your Salesforce interviews with comprehensive questions covering all topics',
+      icon: '💼',
+      color: 'indigo',
+      topics: getTopicsBySection('interview').length,
     },
   ];
 }
